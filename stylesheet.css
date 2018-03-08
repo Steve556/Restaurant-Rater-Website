@@ -1,0 +1,37 @@
+@import url("reset.css");
+
+
+body {
+	background-color: powderblue;
+	
+}
+
+.wrapper {
+	margin-right:15%;
+	margin-left:15%;
+}
+.header {
+	background-color: red;
+	display: flex;	
+	padding:1%;
+}
+
+.header div {
+	flex: 1;
+	margin: auto;
+	text-align:center;
+}
+
+.searchbox {
+}
+
+.cityname {
+	font-size: 48px;
+	background-color:blue;
+}
+
+.registerbox {
+	background-color:green;
+}
+
+
