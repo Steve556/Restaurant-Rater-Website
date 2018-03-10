@@ -9,17 +9,20 @@
 	<body>
 		
 		<div class='header wrapper'>
+		
+			<div class='cityname'>
+				<text>Ottawa</text>
+			</div>
+			
 			<div class='searchbox'>
 				<input type="search" name="search" placeholder="Enter your city"/>
 				<input type="submit" value="Search" />
 			</div>
-			<div class='cityname'>
-				<text>Ottawa</text>
-			</div>
-			<div class='registerbox'>
-				<text>Ottawa</text>
-			</div>
 			
+			<div class='userbox'>
+				<input type="submit" value="Login"/>
+				<input type="submit" value="Register" />
+			</div>
 			
 		</div>
 	</body>

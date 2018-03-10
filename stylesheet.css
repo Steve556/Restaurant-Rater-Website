@@ -1,9 +1,7 @@
 @import url("reset.css");
 
 
-body {
-	background-color: powderblue;
-	
+body {	
 }
 
 .wrapper {
@@ -11,27 +9,19 @@ body {
 	margin-left:15%;
 }
 .header {
-	background-color: red;
-	display: flex;	
-	padding:1%;
-}
-
-.header div {
-	flex: 1;
-	margin: auto;
-	text-align:center;
-}
-
-.searchbox {
+	background-color: powderblue;
 }
 
 .cityname {
-	font-size: 48px;
-	background-color:blue;
+	font-size: 60px;
+	text-align: center;
 }
 
-.registerbox {
-	background-color:green;
+.userbox {
+	float:right;
 }
 
+.searchbox {
+	float:left;
+}
 
