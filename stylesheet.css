@@ -1,13 +1,10 @@
 @import url("reset.css");
 
-
-body {	
-}
-
 .wrapper {
 	margin-right:15%;
 	margin-left:15%;
 }
+
 .header {
 	background-color: powderblue;
 }
@@ -17,11 +14,55 @@ body {
 	text-align: center;
 }
 
-.userbox {
-	float:right;
+#userbox {
+	text-align:right;
 }
 
-.searchbox {
-	float:left;
+button:hover {
+	cursor:pointer;
+	background-color:red;
+}
+
+#maintab {
+    background-color: #4A96AD;
+    height: 30px;
+}
+
+#maintab ul li {
+    float: left;
+    list-style: none;
+    font-family:Arial;
+}
+
+#maintab ul li a {
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: 7px 30px;
+    border-right:2px solid black;
+}
+
+#maintab ul li a:hover {
+    background-color: #0A96AD;
+}
+
+#signupForm {
+	text-align: center;
+}
+
+#signupForm input {
+	margin-bottom: 2%;
+}
+
+#signupForm label {
+	display: inline-block;
+	width: 140px;
+	text-align: left;
+}
+
+.field_set{
+	border: 1px #F00 solid;
 }
 
