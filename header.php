@@ -1,6 +1,6 @@
 <?php
     //include 'dbh.php';
-    //session_start();
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -67,9 +67,7 @@
 				</div>
 			</div>
 			
-			<?php
-				include 'database.php';
-			?>
+			
 		</header>
 	</body>
 </html>
