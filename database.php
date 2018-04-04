@@ -5,15 +5,19 @@
 	$sqldata = pg_query($conn, $sqlget) or die('error getting data');
 	
 	echo "
+			<br>
+			<br>
 			<table class='wrapper databaseTable'>
 				<thead>
-					<th colspan='1'><a href='#'>Advanced tools</a></th>
-				</thead>
-				<tbody>
 					<tr>
 						<th>Restaurant Name</th>
 						<th>Restaurant Type</th>
-						<th>Restaurant Website</th>";
+						<th>Restaurant Website</th>
+					<!--<th colspan='3'><a href='#'>Database</a></th>-->
+					</tr>
+				</thead>
+				<tbody>
+						";
 	
 	while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){ // fetches the data row by row
 		echo "<tr><td>";

@@ -1,8 +1,10 @@
 @import url("reset.css");
 
 .wrapper {
-	margin-right:15%;
-	margin-left:15%;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2px;
+    clear: none;
 }
 
 .header {
@@ -66,3 +68,25 @@ button:hover {
 	border: 1px #F00 solid;
 }
 
+thead {
+    background-color: #4A96AD;
+    height: 30px;
+    color: #fff;
+    border: 1px solid black;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: #fff;
+	text-align: center;
+	padding: 3px;
+}
+
+table, th {
+	padding: 5px;
+}
+table {
+	margin-top: 1%;
+    background-color: grey;
+}
