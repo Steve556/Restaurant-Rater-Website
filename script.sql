@@ -11,7 +11,7 @@ CREATE TABLE Rater
 	joinDate DATE,
 	userType varchar(16),
 	reputation varchar(1),
-	password varchar(16),
+	password varchar(256),
 	username varchar(16)
 );
 

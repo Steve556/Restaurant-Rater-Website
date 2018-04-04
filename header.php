@@ -1,5 +1,4 @@
 <?php
-    //include 'dbh.php';
     session_start();
 ?>
 
@@ -29,15 +28,15 @@
 				-->
 				<div id='userbox'>
 					<?php
-						if(isset($_SESSION['id'])){ // to be changed as (logged in as: EXAMPLE   LOGOUT BUTTON)
-							echo"<form action='includes/logout.inc.php'>
-									<button>LOG OUT</button>
+						if(isset($_SESSION['u_id'])){ // to be changed as (logged in as: EXAMPLE   LOGOUT BUTTON)
+							echo"<form action='includes/logout.inc.php' method='POST'>
+									<button type='submit' name='submit'>LOG OUT</button>
 								 </form>";
 						} else { 
 							echo"<form action='includes/login.inc.php' method='POST'>
 									<input type='text' name='uid' placeholder='Username' maxlength='16' size = '10'>
 									<input type='password' name='pwd' placeholder='Password' maxlength='16' size = '10'>
-									<button type='submit'>LOGIN</button>
+									<button type='submit' name='submit'>LOGIN</button>
 								 </form>
 								 <form action='signup.php'>
 									<button type='submit' style='text-align: right;'>SIGN UP</button>
@@ -57,11 +56,10 @@
 					<ul>
 						<li><a href="index.php">Home</a></li>
 						<?php
-							if(isset($_SESSION['id'])){
+							if(isset($_SESSION['u_id'])){
 								echo "<li><a href='profile.php'>Profile</a></li>";
 							}
 						?>
-						<li><a href="events.php">Events</a></li>
 						<li><a href="help.php">Help</a></li>
 					</ul>
 				</div>

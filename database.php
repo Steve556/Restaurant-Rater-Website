@@ -1,5 +1,5 @@
 <?php
-	include 'dbh.php';
+	include_once 'dbh.php';
 	
 	$sqlget = "SELECT firstName FROM $project_name.rater";
 	$sqldata = pg_query($conn, $sqlget) or die('error getting data');
@@ -11,6 +11,8 @@
 				<thead>
 					<tr>
 						<th>Restaurant Name</th>
+						<th>Restaurant Rating</th>
+						<th>Raters</th>
 						<th>Restaurant Type</th>
 						<th>Restaurant Website</th>
 					<!--<th colspan='3'><a href='#'>Database</a></th>-->

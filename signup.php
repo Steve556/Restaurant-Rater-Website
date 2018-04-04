@@ -1,5 +1,5 @@
 <?php 
-    include 'header.php';
+    include_once 'header.php';
 
     $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     
