@@ -22,6 +22,8 @@
 	while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){ // fetches the data row by row
 		echo "<tr><td>";
 		echo $row['firstname'];
+		echo "<td>" . "<button type=submit name=update value=update>LOGIN</button>" . " </td>";
+		echo "<td>" . "<button type=submit name=delete value=delete>LOGIN</button>" . " </td>";
 		//echo "</td><td>";
 		//echo $row['restauranttype'];
 		//echo "</td><td>";

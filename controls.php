@@ -5,6 +5,10 @@
 		<div class='wrapper controlBox'> 		
 			<fieldset class='field_set'>
 				<legend>Controls</legend>
+		";
+		if(isset($_SESSION['u_id'])){ // if user is logged in then allow him to see controls
+				
+			echo "
 				<form action='index.php' method='POST'> 
 					<label for='add'><b>Add a restaurant</b></label>
 					<button type='submit' class='btn' name='add'>Add restaurant</button>
@@ -15,27 +19,14 @@
 							<option value='Online'>
 							<option value='Food Critic'>
 						</datalist>
-				
-			</form>
-		
-			
-			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<br>
-		<br>
-	";
+					
+				</form>
+				<br>
+				<br>
+				";
+		} else {
+			echo "<b>You must be logged in to view controls to alter with database!<br><br></b>";
+		}
 	
 	if(isset($_POST['add'])){
 		echo "
@@ -61,7 +52,6 @@
 					</fieldset>
 				</form>
 		</div>
-			
 			";
 	};
 	
