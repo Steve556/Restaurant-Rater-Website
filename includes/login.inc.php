@@ -29,10 +29,10 @@
 					} else if ($hashedPwdCheck == true){
 						//Login user
 						$_SESSION['u_id'] = $row['userid'];
-						$_SESSION['u_first'] = $row['userid'];
-						$_SESSION['u_last'] = $row['userid'];
-						$_SESSION['u_email'] = $row['userid'];
-						$_SESSION['u_uid'] = $row['userid'];
+						$_SESSION['u_first'] = $row['firstname'];
+						$_SESSION['u_last'] = $row['lastname'];
+						$_SESSION['u_email'] = $row['emailaddress'];
+						$_SESSION['u_uid'] = $row['username'];
 						header('Location: ../index.php?login=success');
 						exit();
 					}

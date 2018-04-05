@@ -90,3 +90,85 @@ table {
 	margin-top: 1%;
     background-color: grey;
 }
+
+.block {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #373737;
+    width: 300px;
+    margin-bottom: 10px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.userInfo ul li {
+    margin: 4%;
+	text-align:left;
+}
+
+.userInfo {
+	text-align: center;
+}
+
+.clear {
+    clear:both;
+}
+
+.userActivity {
+    text-align: center;
+}
+
+.subBlock {
+    background-color: black;
+    padding: 5px;
+    border: 1px solid #373737;
+    width: 300px;
+    border-bottom: none;
+}
+
+.subBlock a:hover {
+    text-decoration: underline;
+}
+
+.layoutleft {
+    float:left;
+	text-align:center;
+    margin-right: 10px;
+}
+.layoutcenter {
+    overflow: auto;
+}
+
+.recenttabs {
+    background-color: grey;
+    width: 100%;
+    height: 30px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.recenttabs text{
+    float: left;
+    margin: 1px 10px;
+	color: white;
+}
+
+a {
+    color: #fff;
+    font-family:Arial;
+    font-size: 16px;
+}
+
+#avatar {   
+    background-image: url('https://png.pngtree.com/element_origin_min_pic/17/07/21/7507595ce4bd95c7f36f43332c6a5647.jpg');
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    border-radius: 50%;
+    cursor:pointer;
+	display: inline-block;
+}
+
+#avatar:hover {
+    border-radius: 0%;
+}

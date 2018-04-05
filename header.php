@@ -30,6 +30,7 @@
 					<?php
 						if(isset($_SESSION['u_id'])){ // to be changed as (logged in as: EXAMPLE   LOGOUT BUTTON)
 							echo"<form action='includes/logout.inc.php' method='POST'>
+									<text>Logged in as: <b> $_SESSION[u_uid] </b>
 									<button type='submit' name='submit'>LOG OUT</button>
 								 </form>";
 						} else { 
