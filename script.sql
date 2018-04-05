@@ -24,7 +24,7 @@ CREATE TABLE Rating
 	mood varchar(1),
 	staff varchar(1),
 	comments varchar(420),
-	restaurantID varchar(16),
+	restaurantID BIGINT NOT NULL,
 	Primary key(userID, ratingDate)
 );
 
@@ -34,6 +34,18 @@ CREATE TABLE Restaurant
 	restaurantName varchar(16),
 	restaurantType varchar(16),
 	restaurantWebsite varchar(20)
+);
+
+CREATE TABLE Location 
+(
+	locationID SERIAL PRIMARY KEY,
+	firstOpenDate DATE,
+	managerName varchar(32),
+	phoneNumber varchar(16),
+	streetAddress varchar(16),
+	openingHour varchar(2),
+	closingHour varchar(2),
+	restaurantID BIGINT NOT NULL
 );
 
 CREATE TABLE MenuItem
