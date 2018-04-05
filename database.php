@@ -5,8 +5,6 @@
 	$sqldata = pg_query($conn, $sqlget) or die('error getting data');
 	
 	echo "
-			<br>
-			<br>
 			<table class='wrapper databaseTable'>
 				<thead>
 					<tr>

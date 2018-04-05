@@ -1,6 +1,6 @@
 <?php
 
-include '../dbh.php';
+include_once '../dbh.php';
 
 $firstname = $_POST['first'];
 $lastname = $_POST['last'];

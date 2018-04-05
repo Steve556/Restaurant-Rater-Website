@@ -50,15 +50,23 @@ button:hover {
     background-color: #0A96AD;
 }
 
-#signupForm {
+.fillableForm {
 	text-align: center;
 }
 
-#signupForm input {
+.controlBox {
+	text-align: center;
+}
+
+.controlBox button{
+	margin: 10px;
+}
+
+.fillableForm input {
 	margin-bottom: 2%;
 }
 
-#signupForm label {
+.fillableForm label {
 	display: inline-block;
 	width: 140px;
 	text-align: left;
