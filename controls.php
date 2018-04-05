@@ -15,9 +15,22 @@
 					<label for='type'><b>Restaurant type</b></label>
 					<input list='restaurantType' name='type' placeholder='Type of Restaurant'><br>
 						<datalist id='restaurantType'>
-							<option value='Blog'>
-							<option value='Online'>
-							<option value='Food Critic'>
+							<option value='American'>
+							<option value='British'>
+							<option value='Caribbean'>
+							<option value='Chinese'>
+							<option value='French'>
+							<option value='Greek'>
+							<option value='Indian'>
+							<option value='Italian'>
+							<option value='Japanese'>
+							<option value='Mediterranean'>
+							<option value='Mexican'>
+							<option value='Moroccan'>
+							<option value='Spanish'>
+							<option value='Thai'>
+							<option value='Turkish'>
+							<option value='Vietnamese'>
 						</datalist>
 					
 				</form>

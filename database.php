@@ -24,21 +24,21 @@
 	while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){ // fetches the data row by row
 		$sqlgetraters = "SELECT R.restaurantid FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
 		$sqlratersdata = pg_query($conn, $sqlgetraters) or die('error getting data');
-		$sqlgetfoodrating = "SELECT RA.food FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
+		$sqlgetfoodrating = "SELECT ROUND(AVG(RA.food), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
 		$sqlfoodratingdata = pg_query($conn, $sqlgetfoodrating) or die('error getting data');
-		$sqlgetmoodrating = "SELECT RA.mood FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
+		$sqlgetmoodrating = "SELECT ROUND(AVG(RA.mood), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
 		$sqlmoodratingdata = pg_query($conn, $sqlgetmoodrating) or die('error getting data');
-		$sqlgetstaffrating = "SELECT RA.staff FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
+		$sqlgetstaffrating = "SELECT ROUND(AVG(RA.staff), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
 		$sqlstaffratingdata = pg_query($conn, $sqlgetstaffrating) or die('error getting data');
 		
 		echo "<tr><td>";
 		echo $row['restaurantname'];
 		echo "</td><td>";
-		echo pg_num_rows($sqlfoodratingdata);
+		echo pg_fetch_result($sqlfoodratingdata, 0);
 		echo "</td><td>";
-		echo pg_num_rows($sqlmoodratingdata);
+		echo pg_fetch_result($sqlmoodratingdata, 0);
 		echo "</td><td>";
-		echo pg_num_rows($sqlstaffratingdata);
+		echo pg_fetch_result($sqlstaffratingdata, 0);
 		echo "</td><td>";
 		echo pg_num_rows($sqlratersdata);
 		echo "</td><td>";

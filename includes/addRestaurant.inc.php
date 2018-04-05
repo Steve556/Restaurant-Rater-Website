@@ -5,7 +5,6 @@ include_once '../dbh.php';
 $restaurantName = $_POST['name'];
 $restaurantType = $_POST['type'];
 $restaurantWebsite = $_POST['website'];
-//$restaurantAddress = $_POST['pwd1'];
 
 if(empty($restaurantName) || empty($restaurantType) || empty($restaurantWebsite)){
     header('Location: ../index.php?error=emptyFormSubmitted');

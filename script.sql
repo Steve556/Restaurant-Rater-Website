@@ -20,9 +20,9 @@ CREATE TABLE Rating
 	userID BIGINT NOT NULL,
 	ratingDate DATE,
 	price INT,
-	food varchar(1),
-	mood varchar(1),
-	staff varchar(1),
+	food INT NOT NULL,
+	mood INT NOT NULL,
+	staff INT NOT NULL,
 	comments varchar(420),
 	restaurantID BIGINT NOT NULL,
 	Primary key(userID, ratingDate)
