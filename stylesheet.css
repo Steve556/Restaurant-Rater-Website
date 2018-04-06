@@ -122,8 +122,12 @@ table {
     clear:both;
 }
 
-.userActivity {
+.restaurantlocations {
     text-align: center;
+}
+
+.restaurantlocations ul li {
+    margin-bottom: 4%;
 }
 
 .subBlock {
@@ -179,4 +183,22 @@ a {
 
 #avatar:hover {
     border-radius: 0%;
+}
+
+#restaurantimage {   
+    background-image: url('https://www.zonkafeedback.com/wp-content/uploads/2015/01/survey-question.jpg');
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    border-radius: 50%;
+    cursor:pointer;
+	display: inline-block;
+}
+
+#restaurantimage:hover {
+    border-radius: 0%;
+}
+
+.block a {
+	color: blue;
 }

@@ -38,7 +38,7 @@
 		$sqllocationdata = pg_query($conn, $sqlgetlocation) or die('error getting data');
 		
 		echo "<tr><td>";
-		echo "<a href='#'>$row[restaurantname]</a>";
+			echo "<a href='restaurant.php?restaurantid=".$row['restaurantid']."'>$row[restaurantname] </a>";
 		echo "</td><td>";
 		if(is_null(pg_fetch_result($sqlfoodratingdata, 0))){
 			echo "No ratings";
