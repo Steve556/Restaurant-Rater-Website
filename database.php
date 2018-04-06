@@ -4,6 +4,8 @@
 	$sqlget = "SELECT * FROM $project_name.restaurant";
 	$sqldata = pg_query($conn, $sqlget) or die('error getting data');
 	
+	
+	
 	echo "
 			<table class='wrapper databaseTable'>
 				<thead>
@@ -14,7 +16,9 @@
 						<th>Restaurant Staff Rating</th>
 						<th>Raters</th>
 						<th>Restaurant Type</th>
+						<th>Restaurant Location</th>
 						<th>Restaurant Website</th>
+						<th>Controls</th>
 					<!--<th colspan='3'><a href='#'>Database</a></th>-->
 					</tr>
 				</thead>
@@ -30,24 +34,44 @@
 		$sqlmoodratingdata = pg_query($conn, $sqlgetmoodrating) or die('error getting data');
 		$sqlgetstaffrating = "SELECT ROUND(AVG(RA.staff), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
 		$sqlstaffratingdata = pg_query($conn, $sqlgetstaffrating) or die('error getting data');
+		$sqlgetlocation = "SELECT L.streetaddress FROM $project_name.restaurant AS R INNER JOIN $project_name.location AS L ON R.restaurantid = L.restaurantid WHERE R.restaurantname ='$row[restaurantname]' AND R.restaurantid = '$row[restaurantid]'";
+		$sqllocationdata = pg_query($conn, $sqlgetlocation) or die('error getting data');
 		
 		echo "<tr><td>";
-		echo $row['restaurantname'];
+		echo "<a href='#'>$row[restaurantname]</a>";
 		echo "</td><td>";
-		echo pg_fetch_result($sqlfoodratingdata, 0);
+		if(is_null(pg_fetch_result($sqlfoodratingdata, 0))){
+			echo "No ratings";
+		} else {
+			echo pg_fetch_result($sqlfoodratingdata, 0);
+		}
 		echo "</td><td>";
-		echo pg_fetch_result($sqlmoodratingdata, 0);
+		if(is_null(pg_fetch_result($sqlmoodratingdata, 0))){
+			echo "No ratings";
+		} else {
+			echo pg_fetch_result($sqlmoodratingdata, 0);
+		}
 		echo "</td><td>";
-		echo pg_fetch_result($sqlstaffratingdata, 0);
+		if(is_null(pg_fetch_result($sqlstaffratingdata, 0))){
+			echo "No ratings";
+		} else {
+			echo pg_fetch_result($sqlstaffratingdata, 0);
+		}
 		echo "</td><td>";
 		echo pg_num_rows($sqlratersdata);
 		echo "</td><td>";
 		echo $row['restauranttype'];
 		echo "</td><td>";
+		echo pg_fetch_result($sqllocationdata, 0);
+		echo "</td><td>";
 		echo $row['restaurantwebsite'];
 		echo "</td><td>";
-		echo "<button type=submit name=update value=update>EDIT</button></td>";
-		echo "<td>" . "<button type=submit name=delete value=delete>DELETE</button></td>";
+		if (isset($_SESSION['u_id'])){
+			echo "<form action='includes/deleteRestaurant.php' method=POST>";
+			echo "<input type=hidden name=hidden value='" . $row['restaurantid'] . "' </td>";
+			echo "<input type=submit name=delete value=delete>";
+			echo "</form>";
+		}
 		echo "</td></tr>";	
 	}
 	

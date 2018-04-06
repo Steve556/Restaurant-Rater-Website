@@ -60,7 +60,7 @@
 						<label for='website'><b>Restaurant website</b></label>
 						<input type='text' name='website' placeholder='Enter restaurant website'><br>
 						<label for='address'><b>Restaurant address</b></label>
-						<input type='text' name='website' placeholder='Enter restaurant address'><br>
+						<input type='text' name='address' placeholder='Enter restaurant address'><br>
 						<button type='submit' style='margin: 1%;'>ADD RESTAURANT</button>
 					</fieldset>
 				</form>
