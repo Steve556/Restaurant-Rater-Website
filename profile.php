@@ -43,7 +43,7 @@
             
             </div>
             <div class = 'layoutcenter'>
-                <div class = 'recenttabs'>
+                <div class = 'tabs'>
                     <text>Recent Reviews</text>
                 </div>
               
