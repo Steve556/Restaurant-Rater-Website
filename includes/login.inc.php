@@ -22,7 +22,22 @@
 			} else {
 				if ($row = pg_fetch_assoc($result)){
 					//Dehashing password
-					$hashedPwdCheck = password_verify($pwd, $row['password']);
+					
+					//$hashedPwdCheck = password_verify($pwd, $row['password']);
+					if ($pwd != $row['password']){
+						header('Location: ../index.php?login=error');
+						exit();
+					} else {
+						$_SESSION['u_id'] = $row['userid'];
+						$_SESSION['u_first'] = $row['firstname'];
+						$_SESSION['u_last'] = $row['lastname'];
+						$_SESSION['u_email'] = $row['emailaddress'];
+						$_SESSION['u_uid'] = $row['username'];
+						header('Location: ../index.php?login=success');
+						exit();
+					}
+					
+					/* Removed to make it easier to add rows into database in our script file
 					if (hashedPwdCheck == false) {
 						header('Location: ../index.php?login=error');
 						exit();
@@ -36,6 +51,7 @@
 						header('Location: ../index.php?login=success');
 						exit();
 					}
+					*/
 				}
 			}
 		}

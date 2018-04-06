@@ -39,9 +39,9 @@ if(empty($firstname) || empty($lastname) || empty($username) || empty($password1
 					exit();
 				} else {
 					//Hash password
-					$hashedPwd = password_hash($password2, PASSWORD_DEFAULT);
+					//$hashedPwd = password_hash($password2, PASSWORD_DEFAULT); //removed to make it easier to insert data on database
 					//Insert user into database
-					$sql = "INSERT INTO $project_name.rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('$emailaddress','$firstname', '$lastname', CURRENT_DATE,'$usertype', '1', '$hashedPwd', '$username')";
+					$sql = "INSERT INTO $project_name.rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('$emailaddress','$firstname', '$lastname', CURRENT_DATE,'$usertype', '1', '$password2', '$username')";
 					$result = pg_query($conn, $sql);
 					header('Location: ../index.php');
 				}
