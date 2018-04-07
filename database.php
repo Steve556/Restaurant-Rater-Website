@@ -19,7 +19,6 @@
 						<th>Restaurant Location</th>
 						<th>Restaurant Website</th>
 						<th>Controls</th>
-					<!--<th colspan='3'><a href='#'>Database</a></th>-->
 					</tr>
 				</thead>
 				<tbody>
@@ -38,7 +37,7 @@
 		$sqllocationdata = pg_query($conn, $sqlgetlocation) or die('error getting data');
 		
 		echo "<tr><td>";
-			echo "<a href='restaurant.php?restaurantid=".$row['restaurantid']."'>$row[restaurantname] </a>";
+			echo "<a href='restaurant.php?restaurantid=".$row['restaurantid']."&userid=".$_SESSION['u_id']."'>$row[restaurantname] </a>";
 		echo "</td><td>";
 		if(is_null(pg_fetch_result($sqlfoodratingdata, 0))){
 			echo "No ratings";

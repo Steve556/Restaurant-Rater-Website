@@ -20,7 +20,7 @@ CREATE TABLE Rating
 	ratingid SERIAL primary key,
 	userID BIGINT NOT NULL,
 	ratingDate DATE,
-	price INT NOT NULL,
+	price INT,
 	food INT NOT NULL,
 	mood INT NOT NULL,
 	staff INT NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE Location
 CREATE TABLE MenuItem
 (
 	itemID SERIAL PRIMARY key,
-	itemName varchar(64),
+	itemName varchar(128),
 	itemType varchar(64),
 	itemCategory varchar(64),
 	itemDescription varchar(420),
@@ -409,6 +409,8 @@ INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemp
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (140,'Corned Beef Hash','Food','Breakfast','Two eggs any style, corned beef and homefry hash, sliced tomato, fruit and toasted cornbread',15.25,15);
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (141,'Scrambled Feta','Food ','Breakfast','3 Scrambled Eggs, Tomato Concasse, Green Onions and Feta with home fries, salad and toast',14.00,15);
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (142,'Breakfast Club','Food','Breakfast','Two fried eggs, bacon, cheddar, mayo, lettuce, tomato on homemade molasses toast with home fries',13.00,15);
+
+--Insert Location 
 
 
 

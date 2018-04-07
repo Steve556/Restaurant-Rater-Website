@@ -16,6 +16,8 @@
 	$sqlmoodratingdata = pg_query($conn, $sqlgetmoodrating) or die('error getting data');
 	$sqlgetstaffrating = "SELECT ROUND(AVG(RA.staff), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $_GET[restaurantid]";
 	$sqlstaffratingdata = pg_query($conn, $sqlgetstaffrating) or die('error getting data');
+	$sqlgetuserrating = "SELECT * FROM $project_name.rating AS R INNER JOIN $project_name.rater as RA ON R.userid = RA.userid WHERE RA.userid = $_GET[userid]";
+	$sqluserratingdata = pg_query($conn, $sqlgetuserrating) or die('error getting data');
 	
 	
 	echo "
@@ -25,9 +27,9 @@
             <div class = 'layoutleft'>
                 <div class = 'block'>
 		";
-		if (isset($_SESSION['u_id'])){					
+		if (isset($_SESSION['u_id']) & pg_num_rows($sqluserratingdata) < 1){					
 			echo "
-					<form action='restaurant.php?restaurantid=$_GET[restaurantid]' method='POST'>
+					<form action='restaurant.php?restaurantid=$_GET[restaurantid]&userid=$_GET[userid]' method='POST'>
 						<button type='submit' class='btn' name='rate'>Rate Me!</button><br><br>
 					</form>
 				";
