@@ -25,8 +25,18 @@
 		<div class = 'wrapper'>
             <div class = 'layoutleft'>
                 <div class = 'block'>
-                    <text> <b>$row[1]</b> </text><br><br>
-					<div id='restaurantimage'></div>
+		";
+		if (isset($_SESSION['u_id'])){					
+			echo "
+					<form action='restaurant.php?restaurantid=$_GET[restaurantid]' method='POST'>
+						<button type='submit' class='btn' name='rate'>Rate Me!</button><br><br>
+					</form>
+				";
+		}
+		echo "
+                    <text> <b>$row[1]</b></text>
+					<br><br>
+					<div id='restaurantimage'></div><br>
                 </div>
 				<div class = 'clear block restaurantlocations'>
                     <ul>
@@ -98,5 +108,3 @@
             
         </div>
 	";
-	
-	

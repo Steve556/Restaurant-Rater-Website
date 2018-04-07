@@ -20,7 +20,7 @@ CREATE TABLE Rating
 	ratingid SERIAL primary key,
 	userID BIGINT NOT NULL,
 	ratingDate DATE,
-	price INT,
+	price INT NOT NULL,
 	food INT NOT NULL,
 	mood INT NOT NULL,
 	staff INT NOT NULL,
@@ -44,8 +44,8 @@ CREATE TABLE Location
 	managerName varchar(64),
 	phoneNumber varchar(32),
 	streetAddress varchar(256),
-	openingHour varchar(2),
-	closingHour varchar(2),
+	openingHour varchar(10),
+	closingHour varchar(10),
 	restaurantID BIGINT NOT NULL
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE MenuItem
 	itemName varchar(64),
 	itemType varchar(64),
 	itemCategory varchar(64),
-	itemDescription varchar(256),
+	itemDescription varchar(420),
 	itemPrice INT,
 	restaurantID BIGINT NOT NULL
 );
@@ -94,7 +94,7 @@ INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,p
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('eva@gmail.com','Eva', 'Evening', CURRENT_DATE,'Online', '0', 'password', 'Eva');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('seriousfoodie@gmail.com','Serious', 'Foodie', CURRENT_DATE,'Food Critic', '0', 'password', 'serious_foodie');
 
---Inserting into Restaurant, 15 restaurnts inserted
+--Inserting into Restaurant, 15 restaurants inserted
 
 INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Art Is In Bakery','Sandwich, Bakery', 'http://www.artisinbakery.com/');
 INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('El Camino','Mexican, Fusion', 'http://www.eatelcamino.com/');
@@ -257,7 +257,7 @@ INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 4, 4, 4, 4, 'Had supper here with the kids. Service was quick and friendly. Started with a Ceasar salad, it tasted good but the lettuce was kinda warm which doesn''t work well for Ceasar salad. My daughter had the Poutine which was really tasty!', 6);
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 5, 4, 1, 4, 'We sat at the bar as it was a busy Sunday evening we decided to visit. This place is pretty small so many I would recommend having a reservation. The oysters were fresh and served with many tasty sauces. I had the lobster risotto and thought I had died and gone to heaven. Great food, great service!', 7);
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 4, 3, 4, 3, 'The small plates at play are always of high quality and the staff can perfectly pair every dish with a glass of wine. Play Food & Wine offers two floors of seating, so it is a good option if you have a larger group.', 8);
-INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 1, 2, 2, 1, ' Fun house cocktails, southern comfort style food. Unique and tasty offerings. Boiled peanuts at your table. Don''t forget to check out the Speakeasy in the basement! It is mostly community style seating in the main dining room.', 9);
+INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 1, 2, 2, 1, 'Fun house cocktails, southern comfort style food. Unique and tasty offerings. Boiled peanuts at your table. Don''t forget to check out the Speakeasy in the basement! It is mostly community style seating in the main dining room.', 9);
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 2, 1, 1, 2, 'Thought I would "treat" myself to Hintonburger tonight. That was a mistake. Average burger (actually seemed smaller than the last time I was there) average small poutine and can of pop. $20.00!!!! Food quality is falling and prices are basically outrageous for chip truck food. Its a shame used to be a great place. I will no longer recommend it or go back. #pricingyourselfoutofbusiness', 10);
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 1, 1, 3, 3, 'Not enough can be said about Town. Came for a celebratory dinner with a date and we were blown away by the food and service. Extremely knowledgeable staff, great atmosphere and beautiful restaurant.', 11);
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 4, 2, 4, 2, 'very good. charcuterie was excellent . Ok for desert I had the cheese plate and again well presented. . Not often I give a high rating they deserve it and thank you for the excellent service. ', 12);
@@ -265,10 +265,150 @@ INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 3, 3, 3, 3, 'Great service. The pork sandwich with kimchi was awesome. Portions were generous and very affordable. Beer (Manx 20 stock ale) was good. I will go again.', 14);
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 4, 4, 4, 4, 'Food is excellent! Had many vegetarian options. The bobotie with tofu was delicious!! Service slow with reservation of 10 people cause only 1 person serving and bar tending and 2 cooks. Overall good times though!', 15);
 
+--Inserting into Menuitem
 
-
-
-
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (1, 'Art Is In Breakfast Sandwiches', 'Food', 'Breakfast', 'Two fried eggs served on your choice of toasted fresh sourdough or our buttermilk multiseed bread with our house lemon chive mayonnaise.',6.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (2, 'Gluten Free Breakfast', 'Food', 'Breakfast', 'Two eggs your way with candied bacon and greens.',6.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (3, 'Euro Style Quiche (Vege)', 'Food', 'Breakfast', 'with seasonal veggies and goat cheese served with a dollop of our house maple ketchup and a side salad.',12.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (4, 'Euro Style Quiche (Lorraine)', 'Food', 'Breakfast', 'with bacon, ham and gruyere cheese served with a dollop of our house maple ketchup and a side salad.',12.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (5, 'Croque Monsieur', 'Food', 'Breakfast', 'French style ham and cheese sandwich on our fresh sourdough bread layered with Havarti cheese and béchamel sauce, topped with golden melted gruyere cheese. Served with a side salad.',13.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (6, 'Croque Madame', 'Food', 'Breakfast', 'French style ham and cheese sandwich on our fresh sourdough bread layered with Havarti cheese and béchamel sauce, topped with golden melted gruyere cheese. Topped with a sunny egg. Served with a side salad.', 14.95, 1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (7, 'House Granola', 'Food', 'Breakfast', 'Greek yogurt served under Art Is In chocolate, pecan and cranberry granola topped fresh seasonal fruits.',7.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (8, 'Buttermilk Brine Pulled Chicken Caesar Sandwich', 'Food', 'Lunch', 'Tender chicken pieces with bacon, Havarti, tomatoes, arugula and our homemade Caesar dressing served on our Dynamic Cheddar, jalapeno & chive bread.',11.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (9, 'Classic Ham and Cheese', 'Food', 'Lunch', 'Ham, cheddar, tomatoes, arugula, home-made lemon chive mayo served on our Dynamite Rosemary bread.',8.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (10,'Tuna Melt','Food','Lunch','Flaked tuna mixed with diced pickkles, onions, celery, carrots, smoked paprika, dill and mayo with cheddar, tomatoes, and arugula served on our Dynamite white.',9.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (11,'Art Is In Roast Beef','Food','Lunch','Slices of house brined roast beef, topped with Provolone, horseradish mayo, caramelized onions, tomato, arugula served on our Dynamite 12 grain & fennel bread.',11.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (12,'Thai Chicken','Food','Lunch','Charcoal grilled Thai marinated chicken with curry maryo, basil, coriander, julienne applies, peanuts pickled green chillies, tomato, arugula, and Havarti cheese on our Dynamite white.',10.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (13,'Squash Caponata','Food','Lunch','Roasted butternut squash, sundried tomatoes, & basil pesto, olives goat cheese, arugula, tomato on our Dynamite 12 grain & fennel bread.',9.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (14,'Classic Grilled Cheese','Food','Lunch','Gruyere, provolone and caramelized onions on our buttermilk multiseed bread served with our house maple ketchup.',7.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (15,'Fried Crispy Pickle Melt','Food','Lunch','Fried dill pcikles with spicy mayo, caramelized onions, arugula and cheddar on our Dynamite cheddar jalapeno bread.',8.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (16,'Super Salad','Food','Lunch','Fresh mixed greens tossed with quinoa, crunchy apples, berries, shredded carrots, cucumbers, tomatoes, peppers, celery and goat cheese. Tossed in our house vinaigrette and drizzled with balsamic reduction.',11.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (17,'Thai Salad','Food','Lunch','Fresh mixed greens, rice noodles, shredded carrots, cucumbers, peanuts, mint, cilantro and basil with an Amerasian vinaigrette.',11.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (18,'Thai Salad /w Curry Chicken','Food','Lunch','Fresh mixed greens, rice noodles, shredded carrots, cucumbers, peanuts, mint, cilantro and basil with an Amerasian vinaigrette. Topped with Curry Chicken.',13.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (19,'Crunchy Garden Salad (Small)','Food','Lunch','Mixed greens, tomato, celery, cucumber, shredded carrots, and our house vinaigrette sprinkled with sesame seeds.',5.25,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (20,'Crunchy Garden Salad (Large)','Food','Lunch','Mixed greens, tomato, celery, cucumber, shredded carrots, and our house vinaigrette sprinkled with sesame seeds.',9.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (21,'Salad and Soup Combo','Food','Lunch','',10.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (22,'Kevins Clam Chowder','Food','Soups','Fresh and creamy clam chowder with bacon and chunky veggies',6.50,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (23,'Vegan Tomato Soup','Food','Soups','Classic tomato soup with a touch of coconut milk for extra creaminess',5.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (24,'Triple Fried Fries','Food','Sides','Served with garlic mayo and our house maple ketchup',3.25,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (25,'Side of Arugula','Food','Sides','Tossed in house vinaigrette',2.95,1);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (26,'Queso Fundido','Food','Starter','',13.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (27,'Chips & Salsa','Food','Starter','',6.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (28,'Pork Taco','Food','Tacos','',5.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (29,'Beef Taco','Food','Tacos','',5.50,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (30,'Japanese Eggplant Taco','Food','Tacos','',4.50,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (31,'Lamb Taco','Food','Tacos','',6.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (32,'Crispy Fish Taco','Food','Tacos','',6.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (33,'Ox Tongue Taco','Food','Tacos','',6.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (34,'Tuna Tartare Crispy Taco w. Queso & Iceberg Lettuce','Food','Tacos','',10.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (35,'Crispy Prawn Betel Leaf','Food','NotTacos','',9.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (36,'Shrimp Dumplings','Food','NotTacos','',9.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (37,'Green Papaya Salad','Food','NotTacos','',10.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (38,'Salt & Pepper Squid','Food','NotTacos','',10.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (39,'Chilaqulles w. Pork Shoulder, Fresh Curry Leaves, Queso & Juniper Farms Sunny Side Up Egg','Food','NotTacos','',12.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (40,'Chill Lime Caramel Pork Belly w. Green Mango, Young Coconut, Peanuts & Thai Basil','Food','NotTacos','',15.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (41,'Scallop Crudo w. XO Sauce & Lime Leaf','Food','NotTacos','',16.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (42,'Wild Salmon Tartar Tostada w. Avocado, Funky Chill & Pickled Ginger','Food','NotTacos','',14.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (43,'Churros w. Salted Caramel','Food','Dessert','',6.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (44,'Tequilime Pie','Food','Dessert','',6.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (45,'Bourbon Sour','Drink','Cocktails','',10.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (46,'Tequlia Sour','Drink','Cocktails','',10.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (47,'El Fuego','Drink','Cocktails','',10.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (48,'Camino Club','Drink','Cocktails','',10.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (49,'3 Amigos #2','Drink','Cocktails','',13.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (50,'El Camino Manhattan','Drink','Cocktails','',13.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (51,'Margarita','Drink','Cocktails','',13.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (52,'Pina Colada','Drink','Cocktails','',13.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (53,'The Way','Drink','Cocktails','',13.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (54,'Draft Beer','Drink','Beer','',6.20,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (55,'Can Beer (Sapporo)','Drink','Beer','',7.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (56,'Can Beer (Stiegl)','Drink','Beer','',6.50,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (57,'Can Beer (Tecate)','Drink','Beer','',7.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (58,'Sparkling (Glass)','Drink','Wine','',11.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (59,'White (Glass)','Drink','Wine','',12.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (60,'Red (Glass)','Drink','Wine','',11.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (61,'Sparkling (Bottle)','Drink','Wine','',57.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (62,'White (Bottle)','Drink','Wine','',80.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (63,'Red (Bottle)','Drink','Wine','',57.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (64,'Tromba Blanco','Drink','Tequila','',5.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (65,'Jaral de Berreio','Drink','Tequila','',8.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (66,'Los Arrangos Reposado','Drink','Tequila','',9.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (67,'Harradura Reposado','Drink','Tequila','',9.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (68,'Avion Blanco','Drink','Tequila','',9.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (69,'Tromba Reposado','Drink','Tequila','',9.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (70,'Espcion Reposado','Drink','Tequila','',11.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (71,'Don Julio Blanco','Drink','Tequila','',11.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (72,'Tiacuache Mescal','Drink','Tequila','',11.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (73,'Dolce Vida Reposado','Drink','Tequila','',11.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (74,'Milagro Blanco','Drink','Tequila','',11.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (75,'Tromba Anejo','Drink','Tequila','',12.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (76,'Tres Generaciones Anejo','Drink','Tequila','',12.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (77,'Cabo Wabo Reposado','Drink','Tequila','',13.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (78,'Don Julio Reposado','Drink','Tequila','',13.00,2);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (79,'Shrimp Cocktail','Food','Apps','',16.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (80,'Mushroom Tart','Food','Apps','',15.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (81,'Smoked Beef Tataki','Food','Apps','',16.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (82,'Root Beer Glazed Duck Breast','Food','Main','',30.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (83,'Bacon Wrapped Pork Belly','Food','Main','',26.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (84,'Wild King Salmon','Food','Main','',28.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (85,'French Fries - Smoked Chili Aioli','Food','Lunch','',5.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (86,'Cheese Board','Food','Lunch','',15.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (87,'Green Salad','Food','Lunch','',12.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (88,'Burger','Food','Lunch','',15.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (89,'Fresh Pasta','Food','Lunch','',15.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (90,'Yellowfin Tuna','Food','Lunch','',17.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (91,'Lemon Pudding','Food','Desert','',9.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (92,'Chocolate Ganache','Food','Dessert','',11.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (93,'Local Cheese Board','Food','Dessert','',15.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (94,'Mint Lemonade','Drink','Cocktails','Vodka/Muddle Mint/Lemon Juice/Simple Syrup/Soda',11.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (95,'Chipotle','Drink','Cocktails','Grilled Green Onion/Bacon/Vodka/Worcestershire/Chipotle Purée',10.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (96,'Pom Collins','Drink','Cocktails','Gin/Rosemary/Pomegranate Juice/Lime Juice/Ginger Beer',12.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (97,'Highlander - Glayva','Drink','Coffee','',9.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (98,'Celtic - Baileys/Jameson','Drink','Coffee','',9.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (99,'Jamacian - Spiced Rum','Drink','Coffee','',9.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (100,'A Dozen Donuts','Food','Dessert','',10.00,4);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (101,'Lemon Pistachio','Food','Dessert','',2.00,4);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (102,'Salty Caramel','Food','Dessert','',2.00,4);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (103,'Blueberry Pancakes','Food','Breakfast','',11.99,5);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (104,'French Toast','Food','Breakfast','',10.99,5);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (105,'Smoked Meat Poutine','Food','Poutine','Topped with Montreal Smoked Meat',11.99,5);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (106,'ESD Poutine','Food','Poutine','Topped with fried onions and bacon',11.99,5);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (107,'Smoked Festive Platter','Food','Main','Assortment of Smoked Meats',15.99,6);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (108,'Deustche Wurst Deluxe','Food','Main','Speciality Smoked German Sausages served with fries',10.99,6);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (109,'The Smoque Criminal','Food','Main','Smoked Meat served with an assortment of sauerkraut, fries, pickle and choice of white or rye bread',17.99,6);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (110,'Fish and Chips','Food','Lunch','Pacific Cod served with tartar sauce, lemon, pickled onion and slaw',9.99,7);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (111,'Lobster Roll','Food','Lunch','Served with brioche, buttered greens, frites and aioli',11.99,7);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (112,'Lobster','Food','Dinner','Fresh Maine Lobster served with polenta, brussel sprout, chorizo chips and a shallot salad',19.99,7);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (113,'Steelhead Trout','Food','Dinner','Served with carrots, almonds, parsley and touch of honey',13.99,7);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (114,'Grilled Corn','Food','Sides','Topped with cilantro, lime and chili',7.00,8);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (115,'Cabbage Slaw','Food','Sides','Topped with corn nut, snap peas, apple cider and yogurt',7.00,8);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (116,'Albacore Tuna','Food','Main','Topped with garlic scape aioli, beef, truffle oil and jicama insolia',15.00,8);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (117,'Grilled Hanger Steak','Food','Main','Topped with mushrooms, frites, aioli',16.00,8);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (118,'Octopus','Food','Main','Topped with jalapeno, creme fraiche, smoked fingerling and red wine glaze',15.00,8);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (119,'Dirty Burger','Food','Lunch','duuuuuuuuurty',12.00,9);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (120,'Free Range & Southern Fried Chicken','Food','Lunch','Served /w pepper vinegar',12.00,9);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (121,'Rancho-Style Pinto Beans','Food','Lunch','Served /w bacon, tomato, jalapeno, & cilantro',4.00,9);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (122,'Beef Tartare','Food','Apps','1000 Island sauce, iceberg lettuce, pickled onion, avonlea cheddar, benne, potato chips',14.00,9);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (123,'The Hintonburger','Food','Main','6 oz. bacon cheeseburger with signature bbq sauce, plus fresh cut fries and a drink',15.50,10);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (124,'The Armstrong','Food','Main','4 oz. burger plus fresh cut fries and a drink',12.90,10);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (125,'The Wellington','Food','Main','6 oz. burger plus fresh cut fries and a drink',14.50,10);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (126,'Stirling Stacker','Food','Main',' 3 oz. burger with option to stack patties',9.50,10);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (127,'Grilled Octupus Salad','Food','Apps','Grilled confit potatoes with gigante beans, corpse reviver lemons, red onion, dried filicetti sausage, picked chili, frisse, and soffritto',18.00,11);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (128,'Chilled Porchetta Salad','Food','Apps','Served with fennel zeppoie, apple, celery, fennel, green goddess dressing, fennel saly, caper berries and chilis',17.00,11);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (129,'Crispy Fried Eggplant','Food','Main','Served with tomato basil sauce, spicy pickled eggplant, parmesan, ricotta, frie degg, and arugula',17.00,11);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (130,'Steak & Eggs','Food','Main','Our char-boiled striploin served with two eggs, home fries, fresh fruit and toast',17.95,12);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (131,'Atlantic Smoked Salmon Benedict','Food','Main','Served with home fries and fresh fruit',14.95,12);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (132,'Greek Salad','Food','Lunch','Vine riped tomatoes, cucumbers, red onion, peppers, tossed in an olive oil and oregano dressing topped with kalamata olives and of course feta cheese',9.95,12);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (133,'Chicken Wings','Food','Sides','BBQ, mild, medium, hot or suicide',10.00,13);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (134,'Mussels and Fries','Food','Sides','with daily sauce',10.00,13);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (135,'10 oz Grilled Pork Chop','Food','Main','bulls-eye barbecue sauce',7.00,13);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (136,'Soup of the Dat','Food','Lunch','',6.00,14);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (137,'Baby Spinach Salad','Food','Lunch','Topped with a potato-apple rosti & cheddar with a red wine vinaigrette',12.00,14);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (138,'Moroccan Braised Short Ribs','Food','Dinner','Served over feta, olive & chickpea ragout with a baby spinach salad tossed in preserved lemon dressing',18.00,14);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (139,'Breakfast Jerk Ribs','Food','Breakfast','Two eggs any style, half rack of house jerked ribs, home fries and toasted cornbread',17.50,15);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (140,'Corned Beef Hash','Food','Breakfast','Two eggs any style, corned beef and homefry hash, sliced tomato, fruit and toasted cornbread',15.25,15);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (141,'Scrambled Feta','Food ','Breakfast','3 Scrambled Eggs, Tomato Concasse, Green Onions and Feta with home fries, salad and toast',14.00,15);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (142,'Breakfast Club','Food','Breakfast','Two fried eggs, bacon, cheddar, mayo, lettuce, tomato on homemade molasses toast with home fries',13.00,15);
 
 
 

@@ -216,6 +216,15 @@ a {
 	color: blue;
 }
 
+.block button {
+	float:right;
+	background-color: orange;
+}
+
+.block button:hover {
+	background-color: yellow;
+}
+
 .commentbox {
 	width: 100%;
 	box-sizing: border-box;

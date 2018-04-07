@@ -24,8 +24,19 @@
 		<div class = 'wrapper'>
             <div class = 'layoutleft'>
                 <div class = 'block'>
-                    <text> <b>$row[1]</b> </text><br><br>
-					<div id='restaurantimage'></div>
+		";
+		if (isset($_SESSION['u_id'])){					
+			echo "
+					<form action='restaurant.php?restaurantid=$_GET[restaurantid]' method='POST'>
+						<button type='submit' class='btn' name='rate'>Rate Me!</button><br><br>
+					</form>
+				";
+		}
+		
+	echo "
+                    <text> <b>$row[1]</b></text>
+					<br><br>
+					<div id='restaurantimage'></div><br>
                 </div>
 				<div class = 'clear block restaurantlocations'>
                     <ul>
@@ -71,17 +82,45 @@
 	echo "
                     </ul>
                 </div>
-            
             </div>
-            <div class = 'layoutcenter'>
-                <div class = 'tabs'>
-                    <ul>
-                        <li><a href='restaurant.php?restaurantid=$_GET[restaurantid]'>Menu</a></li>
-                        <li><a href='restaurantwithreviews.php?restaurantid=$_GET[restaurantid]'>Recent Reviews</a></li>
-                    </ul>
-                </div>
-            </div>
-            
+		";
+			if(isset($_POST['rate'])){
+				echo "
+					<div class = 'layoutcenter'>
+						<div class='fillableForm'>
+							<form action='includes/addrestaurantrating.php?restaurantid=$_GET[restaurantid]&userid=$_SESSION[u_id]' method='POST'>
+								<fieldset class='field_set'>
+									<legend>Fill Form</legend>
+									<p>Please fill in this form to rate the <b>restaurant</b>.</p><br>
+									<label for='pricerating'><b>Restaurant Price </b></label>
+									<input type='text' name='pricerating' placeholder='Answer from 1-5' maxlength='1'><br>
+									<label for='foodrating'><b>Restaurant Food</b></label>
+									<input type='text' name='foodrating' placeholder='Answer from 1-5' maxlength='1'><br>
+									<label for='moodrating'><b>Restaurant Mood</b></label>
+									<input type='text' name='moodrating' placeholder='Answer from 1-5' maxlength='1'><br>
+									<label for='staffrating'><b>Restaurant Staff</b></label>
+									<input type='text' name='staffrating' placeholder='Answer from 1-5' maxlength='1'><br>
+									<label for='comments'><b>Comment</b></label>
+									<input type='comments' name='comments' placeholder='Enter a comment' maxlength='419'><br>
+									<button type='submit' style='margin: 1%;'>RATE RESTAURANT</button>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				";			
+			} else {
+				echo "
+					<div class = 'layoutcenter'>
+						<div class = 'tabs'>
+							<ul>
+								<li><a href='restaurant.php?restaurantid=$_GET[restaurantid]'>Menu</a></li>
+								<li><a href='restaurantwithreviews.php?restaurantid=$_GET[restaurantid]'>Recent Reviews</a></li>
+							</ul>
+						</div>
+					</div>
+				";
+			}
+    echo "
         </div>
 	";
 	
