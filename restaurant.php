@@ -16,7 +16,7 @@
 	$sqlmoodratingdata = pg_query($conn, $sqlgetmoodrating) or die('error getting data');
 	$sqlgetstaffrating = "SELECT ROUND(AVG(RA.staff), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $_GET[restaurantid]";
 	$sqlstaffratingdata = pg_query($conn, $sqlgetstaffrating) or die('error getting data');
-	$sqlgetuserrating = "SELECT * FROM $project_name.rating AS R INNER JOIN $project_name.rater as RA ON R.userid = RA.userid WHERE RA.userid = $_GET[userid]";
+	$sqlgetuserrating = "SELECT * FROM $project_name.rating AS R INNER JOIN $project_name.rater as RA ON R.userid = RA.userid WHERE RA.userid = $_GET[userid] AND R.restaurantid = $_GET[restaurantid]";
 	$sqluserratingdata = pg_query($conn, $sqlgetuserrating) or die('error getting data');
 	
 	
@@ -115,8 +115,8 @@
 					<div class = 'layoutcenter'>
 						<div class = 'tabs'>
 							<ul>
-								<li><a href='restaurant.php?restaurantid=$_GET[restaurantid]'>Menu</a></li>
-								<li><a href='restaurantwithreviews.php?restaurantid=$_GET[restaurantid]'>Recent Reviews</a></li>
+								<li><a href='restaurant.php?restaurantid=$_GET[restaurantid]&userid=$_GET[userid]'>Menu</a></li>
+								<li><a href='restaurantwithreviews.php?restaurantid=$_GET[restaurantid]&userid=$_GET[userid]'>Recent Reviews</a></li>
 							</ul>
 						</div>
 					</div>
