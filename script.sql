@@ -96,21 +96,21 @@ INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,p
 
 --Inserting into Restaurant, 15 restaurants inserted
 
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Art Is In Bakery','Sandwich, Bakery', 'http://www.artisinbakery.com/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('El Camino','Mexican, Fusion', 'http://www.eatelcamino.com/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Allium','Canadian, Tapas', 'http://www.alliumrestaurant.com/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('SuzyQ','Desserts', 'https://suzyq.ca/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Elgin Street Diner','Diner', 'N/A');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('The Smoque Shack','BBQ, Burger, Southern', 'http://smoqueshack.com/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Whalesbone Oyster House','Seafood', 'https://thewhalesbone.com/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Play Food & Wine','Tapas', 'N/A');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Union Local 613','Canadian, Southern', 'http://www.union613.ca/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Hintonburger','Burger, American', 'N/A');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Town','Italian, Canadian', 'http://townlovesyou.ca/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Baker Street Cafe','Canadian, Diner', 'N/A');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Chez Lucien','Burger, Canadian', 'N/A');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('The Manx','Bar Food', 'http://manxpub.com/');
-INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Stoneface Dollys','Canadian, Fusion', 'N/A');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Art Is In Bakery','Italian', 'http://www.artisinbakery.com/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('El Camino','Mexican', 'http://www.eatelcamino.com/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Allium','Canadian', 'http://www.alliumrestaurant.com/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('SuzyQ','Canadian', 'https://suzyq.ca/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Elgin Street Diner','American', 'N/A');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('The Smoque Shack','American', 'http://smoqueshack.com/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Whalesbone Oyster House','Canadian', 'https://thewhalesbone.com/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Play Food & Wine','French', 'N/A');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Union Local 613','Canadian', 'http://www.union613.ca/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Hintonburger','American', 'N/A');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Town','Italian', 'http://townlovesyou.ca/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Baker Street Cafe','Canadian', 'N/A');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Chez Lucien','Canadian', 'N/A');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('The Manx','American', 'http://manxpub.com/');
+INSERT INTO Restaurant(restaurantname,restauranttype,restaurantwebsite) VALUES ('Stoneface Dollys','Canadian', 'N/A');
 
 --Inserting into Rating, 150 ratings inserted each restaurant 10 ratings
 
@@ -357,7 +357,7 @@ INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemp
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (88,'Burger','Food','Lunch','',15.00,3);
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (89,'Fresh Pasta','Food','Lunch','',15.00,3);
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (90,'Yellowfin Tuna','Food','Lunch','',17.00,3);
-INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (91,'Lemon Pudding','Food','Desert','',9.00,3);
+INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (91,'Lemon Pudding','Food','Dessert','',9.00,3);
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (92,'Chocolate Ganache','Food','Dessert','',11.00,3);
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (93,'Local Cheese Board','Food','Dessert','',15.00,3);
 INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemprice,restaurantid) VALUES (94,'Mint Lemonade','Drink','Cocktails','Vodka/Muddle Mint/Lemon Juice/Simple Syrup/Soda',11.00,3);
@@ -412,19 +412,19 @@ INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemp
 
 --Insert Location 
 
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (1,CURRENT_DATE,'Joe Jaden','+1 (613) 695-1226','250 City Centre Avenue, Unit 112, Ottawa, ON K1R1C7','7:00AM','7:00PM',1);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (2,CURRENT_DATE,'Ruth Shultz','+1 (613) 422-2800','380 Elgin Street, Ottawa, ON K2P1M9', '5:30PM', '2:00AM',2);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (3,CURRENT_DATE,'Anna Sakz','+1 (613) 792-1313','87 Holland Avenue, Ottawa, ON K1Y0Y1','5:30PM','10:00PM',3);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (4,CURRENT_DATE,'Orth Gabit','+1 (613) 724-2451','969 Wellington Street West, Ottawa, ON K1Y2Y1','7:00AM','7:00PM',4);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (5,CURRENT_DATE,'Ribon Jonquist','+1 (613) 237-9700','374 Elgin Street, Ottawa, ON K2P1M9','12:00PM','12:00PM',5);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (6,CURRENT_DATE,'Zak Luftz','+1 (613) 789-4245','129 York Street, Ottawa, ON K1N7J3','11:30AM','11:00PM',6);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (7,CURRENT_DATE,'Vladimir Holter','+1 (613) 231-8569','430 Bank Street, Ottawa, ON K2P1Y8','5:00PM','11:00PM',7);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (8,CURRENT_DATE,'Cropa Shuoit','+1 (613) 667-9207','1 York Street, Ottawa, ON K1N6Z5','5:00PM','11:45PM',8);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (9,CURRENT_DATE,'Craig Helmt','+1 (613) 231-1010','315 Somerset Street West, Ottawa, ON K2P0J8','5:30PM','2:00AM',9);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (10,CURRENT_DATE,'Maggie McDonalder','+1 (613) 724-4676','1096 Wellington Street West, Ottawa, ON K1Y2Y4','11:00AM','9:00PM',10);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (11,CURRENT_DATE,'Freddie Item','+1 (613) 695-8696','296 Elgin Street, Ottawa, ON K2P1M3','5:00PM','11:00PM',11);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (12,CURRENT_DATE,'Tran Trieu','+1 (613) 761-7171','385 Richmond Road, Ottawa, ON K2A0E7','7:00AM','2:30PM',12);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (13,CURRENT_DATE,'Igor Vditi','+1 (613) 241-3533','137 Murray Street, Ottawa, ON, K1N5M7','11:00AM','2:00AM',13);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (14,CURRENT_DATE,'Kane Broadman','+1 (613) 531-2070','370 Elgin Street, Ottawa, ON K2P1N1','11:30AM','2:00AM',14);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (15,CURRENT_DATE,'Mike Wugsk','+1 (613) 564-2222','416 Preston Street, Ottawa, ON K1S4M9','5:00PM','10:00PM',15);
 
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (1,CURRENT_DATE,'','+1 (613) 695-1226','250 City Centre Avenue, Unit 112, Ottawa, ON K1R1C7','7:00AM','7:00PM',1);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (2,CURRENT_DATE,'','+1 (613) 422-2800','380 Elgin Street, Ottawa, ON K2P1M9', '5:30PM', '2:00AM',2);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (3,CURRENT_DATE,'','+1 (613) 792-1313','87 Holland Avenue, Ottawa, ON K1Y0Y1','5:30PM','10:00PM',3);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (4,CURRENT_DATE,'','+1 (613) 724-2451','969 Wellington Street West, Ottawa, ON K1Y2Y1','7:00AM','7:00PM',4);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (5,CURRENT_DATE,'','+1 (613) 237-9700','374 Elgin Street, Ottawa, ON K2P1M9','12:00PM','12:00PM',5);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (6,CURRENT_DATE,'','+1 (613) 789-4245','129 York Street, Ottawa, ON K1N7J3','11:30AM','11:00PM',6);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (7,CURRENT_DATE,'','+1 (613) 231-8569','430 Bank Street, Ottawa, ON K2P1Y8','5:00PM','11:00PM',7);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (8,CURRENT_DATE,'','+1 (613) 667-9207','1 York Street, Ottawa, ON K1N6Z5','5:00PM','11:45PM',8);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (9,CURRENT_DATE,'','+1 (613) 231-1010','315 Somerset Street West, Ottawa, ON K2P0J8','5:30PM','2:00AM',9);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (10,CURRENT_DATE,'','+1 (613) 724-4676','1096 Wellington Street West, Ottawa, ON K1Y2Y4','11:00AM','9:00PM',10);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (11,CURRENT_DATE,'','+1 (613) 695-8696','296 Elgin Street, Ottawa, ON K2P1M3','5:00PM','11:00PM',11);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (12,CURRENT_DATE,'','+1 (613) 761-7171','385 Richmond Road, Ottawa, ON K2A0E7','7:00AM','2:30PM',12);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (13,CURRENT_DATE,'','+1 (613) 241-3533','137 Murray Street, Ottawa, ON, K1N5M7','11:00AM','2:00AM',13);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (14,CURRENT_DATE,'','+1 (613) 531-2070','370 Elgin Street, Ottawa, ON K2P1N1','11:30AM','2:00AM',14);
-INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (15,CURRENT_DATE,'','+1 (613) 564-2222','416 Preston Street, Ottawa, ON K1S4M9','5:00PM','10:00PM',15);

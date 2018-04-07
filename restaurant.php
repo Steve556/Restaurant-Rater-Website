@@ -18,7 +18,14 @@
 	$sqlstaffratingdata = pg_query($conn, $sqlgetstaffrating) or die('error getting data');
 	$sqlgetuserrating = "SELECT * FROM $project_name.rating AS R INNER JOIN $project_name.rater as RA ON R.userid = RA.userid WHERE RA.userid = $_GET[userid] AND R.restaurantid = $_GET[restaurantid]";
 	$sqluserratingdata = pg_query($conn, $sqlgetuserrating) or die('error getting data');
-	
+	if(isset($_POST['category'])){
+		$sqlgetmenuitems = "SELECT * FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid] AND M.itemcategory='".$_POST['category']."'";
+	} else {
+		$sqlgetmenuitems = "SELECT * FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid]";
+	}
+	$sqlmenudata = pg_query($conn, $sqlgetmenuitems) or die('error getting data');
+	$sqlgetcategorytypes = "SELECT DISTINCT itemcategory FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid]";
+	$sqlcategorydata = pg_query($conn, $sqlgetcategorytypes) or die('error getting data');
 	
 	echo "
 		<br>
@@ -119,8 +126,62 @@
 								<li><a href='restaurantwithreviews.php?restaurantid=$_GET[restaurantid]&userid=$_GET[userid]'>Recent Reviews</a></li>
 							</ul>
 						</div>
-					</div>
-				";
+					<div class = 'menubox clear'>
+						<form action='restaurant.php?restaurantid=$_GET[restaurantid]&userid=$_GET[userid]' method='POST'> 
+							<label for='category'><b>Choose a category type to filter menu: </b></label>
+							<input list='raterType' name='category' placeholder='Type of item category?'>
+							<datalist id='raterType'>
+					";
+							while($row3 = pg_fetch_array($sqlcategorydata, NULL, PGSQL_ASSOC)){ // fetches the data row by row for the locations of restaurant
+								echo "<option value='".$row3['itemcategory']."'>";
+							}
+				echo"
+							</datalist>
+							<button type='submit'>FILTER</button>
+						</form>
+						<text style ='color: red;'><b>To reset filter click on menu in tab!!</b></text>
+
+					<h1>MENU</h1>
+					";
+				$num = 1;
+				echo "	<table>
+							<thead>
+								<tr>
+									<th></th>
+									<th>Item name</th>
+									<th>Item type</th>
+									<th>Item category</th>
+									<th>Item description</th>
+									<th>Item price</th>
+								</tr>
+							</thead>
+							<tbody>";
+				while($row2 = pg_fetch_array($sqlmenudata, NULL, PGSQL_ASSOC)){ // fetches the data row by row for the ratings of the restaurant
+					echo "
+						<tr>
+							<td>
+								$num.
+							</td>
+							<td>
+								$row2[itemname]
+							</td>
+							<td>
+								$row2[itemtype]
+							</td>
+							<td>
+								$row2[itemcategory]
+							</td>
+							<td>
+								$row2[itemdescription]
+							</td>
+							<td>
+								$ $row2[itemprice]
+							</td>
+						</tr>
+						";
+					$num++;
+				}
+				echo "</tbody></table></div>";
 			}
     echo "
         </div>

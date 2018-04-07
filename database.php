@@ -7,7 +7,7 @@
 	
 	
 	echo "
-			<table class='wrapper databaseTable'>
+			<table class='wrapper databasetable'>
 				<thead>
 					<tr>
 						<th>Restaurant Name</th>
