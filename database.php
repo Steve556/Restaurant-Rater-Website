@@ -3,6 +3,12 @@
 	
 	if (isset($_POST['type'])){
 		$sqlget = "SELECT * FROM $project_name.restaurant WHERE restauranttype='$_POST[type]'";
+	} else if (isset($_POST['years']) && isset($_POST['months'])){
+		$sqlget = "SELECT * 
+				   FROM $project_name.restaurant AS R
+                   WHERE R.restaurantid NOT IN (SELECT RA.restaurantid
+						                    FROM $project_name.rating AS RA
+						                    WHERE EXTRACT(YEAR FROM ratingdate) = '$_POST[years]' AND EXTRACT(MONTH FROM ratingdate) = '$_POST[months]');";
 	} else {
 		$sqlget = "SELECT * FROM $project_name.restaurant";
 	}
@@ -29,8 +35,8 @@
 					</tr>
 				</thead>
 				<tbody>
-						";
-	
+		";
+		
 	while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){ // fetches the data row by row
 		$sqlgetraters = "SELECT R.restaurantid FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
 		$sqlratersdata = pg_query($conn, $sqlgetraters) or die('error getting data');

@@ -73,7 +73,7 @@ CREATE TABLE RatingItem
 
 --Inserting into Raters, 20 raters inserted
 
-INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('admin@gmail.com','God', 'IsMe', CURRENT_DATE,'God', '0', 'password', 'admin');
+INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('admin@gmail.com','Admin', 'Admin', CURRENT_DATE,'Admin', '0', 'password', 'admin');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('nominator@gmail.com','Hannah', 'Montanna', CURRENT_DATE,'Food Critic', '0', 'password', 'nominator');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('miyenho@gmail.com','Miyen', 'Ho', CURRENT_DATE,'Food Critic', '0', 'password', 'miyen_ho');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('jessica@gmail.com','Jess', 'Ica', CURRENT_DATE,'Food Critic', '0', 'password', 'jhess');

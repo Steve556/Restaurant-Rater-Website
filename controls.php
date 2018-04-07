@@ -40,9 +40,9 @@
 						<a href='index.php'>RESET</a>
 				</form>
 				
-				<form action='includes/getrestaurantwithnorating.php' method='POST'>
+				<form action='index.php' method='POST'>
 					<label for='yearwithnorating'><b>Filter restaurant by year with no rating</b></label>
-					<input list='years' name='yearwithnorating' placeholder='Choose a year.'>
+					<input list='years' name='years' placeholder='Choose a year.'>
 						<datalist id='years'>
 							<option value='2018'>
 							<option value='2017'>
@@ -55,6 +55,21 @@
 							<option value='2010'>
 							<option value='2009'>
 							<option value='2008'>
+						</datalist>
+					<input list='months' name='months' placeholder='Choose a month.'>
+						<datalist id='months'>
+							<option value='1'>
+							<option value='2'>
+							<option value='3'>
+							<option value='4'>
+							<option value='5'>
+							<option value='6'>
+							<option value='7'>
+							<option value='8'>
+							<option value='9'>
+							<option value='10'>
+							<option value='11'>
+							<option value='12'>
 						</datalist>
 						<button type='submit'>FILTER</button>	
 				</form>
