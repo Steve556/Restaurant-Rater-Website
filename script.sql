@@ -413,8 +413,18 @@ INSERT INTO Menuitem(itemid,itemname,itemtype,itemcategory,itemdescription,itemp
 --Insert Location 
 
 
-
-
-
-
-
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (1,CURRENT_DATE,'','+1 (613) 695-1226','250 City Centre Avenue, Unit 112, Ottawa, ON K1R1C7','7:00AM','7:00PM',1);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (2,CURRENT_DATE,'','+1 (613) 422-2800','380 Elgin Street, Ottawa, ON K2P1M9', '5:30PM', '2:00AM',2);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (3,CURRENT_DATE,'','+1 (613) 792-1313','87 Holland Avenue, Ottawa, ON K1Y0Y1','5:30PM','10:00PM',3);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (4,CURRENT_DATE,'','+1 (613) 724-2451','969 Wellington Street West, Ottawa, ON K1Y2Y1','7:00AM','7:00PM',4);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (5,CURRENT_DATE,'','+1 (613) 237-9700','374 Elgin Street, Ottawa, ON K2P1M9','12:00PM','12:00PM',5);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (6,CURRENT_DATE,'','+1 (613) 789-4245','129 York Street, Ottawa, ON K1N7J3','11:30AM','11:00PM',6);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (7,CURRENT_DATE,'','+1 (613) 231-8569','430 Bank Street, Ottawa, ON K2P1Y8','5:00PM','11:00PM',7);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (8,CURRENT_DATE,'','+1 (613) 667-9207','1 York Street, Ottawa, ON K1N6Z5','5:00PM','11:45PM',8);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (9,CURRENT_DATE,'','+1 (613) 231-1010','315 Somerset Street West, Ottawa, ON K2P0J8','5:30PM','2:00AM',9);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (10,CURRENT_DATE,'','+1 (613) 724-4676','1096 Wellington Street West, Ottawa, ON K1Y2Y4','11:00AM','9:00PM',10);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (11,CURRENT_DATE,'','+1 (613) 695-8696','296 Elgin Street, Ottawa, ON K2P1M3','5:00PM','11:00PM',11);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (12,CURRENT_DATE,'','+1 (613) 761-7171','385 Richmond Road, Ottawa, ON K2A0E7','7:00AM','2:30PM',12);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (13,CURRENT_DATE,'','+1 (613) 241-3533','137 Murray Street, Ottawa, ON, K1N5M7','11:00AM','2:00AM',13);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (14,CURRENT_DATE,'','+1 (613) 531-2070','370 Elgin Street, Ottawa, ON K2P1N1','11:30AM','2:00AM',14);
+INSERT INTO Location(locationid,firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (15,CURRENT_DATE,'','+1 (613) 564-2222','416 Preston Street, Ottawa, ON K1S4M9','5:00PM','10:00PM',15);

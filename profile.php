@@ -5,7 +5,8 @@
 	$sql = "SELECT joindate FROM $project_name.rater WHERE userid = $_SESSION[u_id]";
 	$sqldata = pg_query($conn, $sql) or die('error getting data');
 	$row = pg_fetch_row($sqldata);
-	
+	$sqlratings = "SELECT R.userid FROM $project_name.rater AS R INNER JOIN $project_name.rating AS RA ON R.userid = RA.userid WHERE R.userid = $_SESSION[u_id]";
+	$sqlratingsdata = pg_query($conn, $sqlratings) or die('error getting data');
 	
 	echo "
 		<br>
@@ -18,7 +19,8 @@
                 </div>
 				<div class = 'clear block userInfo'>
                     <ul>
-                        <li>Following:</li>
+                        <li>Number of ratings: &nbsp"; echo pg_num_rows($sqlratingsdata);
+	echo "				</li>
                         <li>Followers:</li>
                         <li>Reviews:</li>
                     </ul>
