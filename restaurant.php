@@ -10,6 +10,8 @@
 	$locationrow = pg_fetch_row($sqllocationdata);
 	$sqlgetotherlocations = "SELECT L.streetaddress FROM $project_name.restaurant AS R INNER JOIN $project_name.location AS L ON R.restaurantid = L.restaurantid WHERE R.restaurantid = $_GET[restaurantid] AND restaurantname ='$row[1]'";
 	$sqlotherlocationsdata = pg_query($conn, $sqlgetotherlocations) or die('error getting data');
+	$sqlgetratings = "SELECT * FROM $project_name.RATING AS R INNER JOIN $project_name.RESTAURANT AS RA ON R.restaurantid = RA.restaurantid INNER JOIN $project_name.RATER AS RAT ON RAT.userid = R.userid WHERE R.restaurantid = $_GET[restaurantid]";
+	$sqlratingdata = pg_query($conn, $sqlgetratings) or die('error getting data');
 	$sqlgetfoodrating = "SELECT ROUND(AVG(RA.food), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $_GET[restaurantid]";
 	$sqlfoodratingdata = pg_query($conn, $sqlgetfoodrating) or die('error getting data');
 	$sqlgetmoodrating = "SELECT ROUND(AVG(RA.mood), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $_GET[restaurantid]";	
@@ -18,14 +20,19 @@
 	$sqlstaffratingdata = pg_query($conn, $sqlgetstaffrating) or die('error getting data');
 	$sqlgetuserrating = "SELECT * FROM $project_name.rating AS R INNER JOIN $project_name.rater as RA ON R.userid = RA.userid WHERE RA.userid = $_GET[userid] AND R.restaurantid = $_GET[restaurantid]";
 	$sqluserratingdata = pg_query($conn, $sqlgetuserrating) or die('error getting data');
+	
 	if(isset($_POST['category'])){
+		$sqlmaxpriceditem = "SELECT Menuitem.itemname as ItemName, MenuItem.itemprice as MaxPrice, Location.managername as ManagerName, Location.openinghour as OpenHours, Restaurant.restaurantwebsite as RestURL FROM $project_name.menuitem INNER JOIN $project_name.Location ON Menuitem.restaurantid=Location.restaurantid INNER JOIN $project_name.Restaurant ON Menuitem.restaurantid=Restaurant.restaurantid WHERE Menuitem.itemcategory = '".$_POST['category']."' AND Menuitem.restaurantid = '$_GET[restaurantid]' and itemprice = (SELECT MAX(itemprice) FROM $project_name.menuitem WHERE restaurantid = '$_GET[restaurantid]' AND Menuitem.itemcategory = '".$_POST['category']."');";
 		$sqlgetmenuitems = "SELECT * FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid] AND M.itemcategory='".$_POST['category']."'";
 	} else {
+		$sqlmaxpriceditem = "SELECT Menuitem.itemname as ItemName, MenuItem.itemprice as MaxPrice, Location.managername as ManagerName, Location.openinghour as OpenHours, Restaurant.restaurantwebsite as RestURL FROM $project_name.menuitem INNER JOIN $project_name.Location ON Menuitem.restaurantid=Location.restaurantid INNER JOIN $project_name.Restaurant ON Menuitem.restaurantid=Restaurant.restaurantid WHERE Menuitem.restaurantid = '$_GET[restaurantid]' and itemprice = (SELECT MAX(itemprice) FROM $project_name.menuitem WHERE restaurantid = '$_GET[restaurantid]');";
 		$sqlgetmenuitems = "SELECT * FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid]";
 	}
 	$sqlmenudata = pg_query($conn, $sqlgetmenuitems) or die('error getting data');
 	$sqlgetcategorytypes = "SELECT DISTINCT itemcategory FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid]";
 	$sqlcategorydata = pg_query($conn, $sqlgetcategorytypes) or die('error getting data');
+	$sqlmaxpricedata = pg_query($conn, $sqlmaxpriceditem) or die('error getting data');
+	$row11 = pg_fetch_row($sqlmaxpricedata);
 	
 	echo "
 		<br>
@@ -68,17 +75,24 @@
 		} else {
 			echo "<li>Staff: ".pg_fetch_result($sqlstaffratingdata, 0)."</li>";
 		}
+		//////////////
+		if(is_null(pg_fetch_result($sqlratingdata, 0))){
+			echo "<li>No ratings</li>";
+		} else {
+			echo "<li>Number of ratings: ".pg_num_rows($sqlratingdata)."</li>";
+		}
 	echo "	
 					</ul>
                 </div>
 				<div class = 'clear block userInfo'>
                     <ul>
-                        <li>Phone number: $locationrow[3]</li>
-                        <li>Cuisines: $row[2]</li>
+                        <li>Phone number: <text style='color:green'><b>$locationrow[3]</text></b></li>
+                        <li>Restaurant type: $row[2]</li>
 						<li>Opening hours: $locationrow[5] - $locationrow[6]</li>
 						<li>Location: $locationrow[4]</li>
-						<li>Website: <a href='$row[3]' target='_blank'>$row[3]</a></li>
+						<li>Manager name: $locationrow[2]</li>
 						<li>Established in: $locationrow[1]</li>
+						<li>Website: <a href='$row[3]' target='_blank'>$row[3]</a></li>
                     </ul>
                 </div>
                 <div class = 'clear block restaurantlocations'>
@@ -139,9 +153,12 @@
 							</datalist>
 							<button type='submit'>FILTER</button>
 						</form>
-						<text style ='color: red;'><b>To reset filter click on menu in tab!!</b></text>
-
+						<text style ='color: red;'><b>To reset filter click on menu in tab!!</b></text><br>
+					";
+					
+				echo "
 					<h1>MENU</h1>
+					<text><b>Maxed price item:</b></text> ".$row11[0]." with a price of: $".$row11[1]."
 					";
 				$num = 1;
 				echo "	<table>
@@ -186,5 +203,3 @@
     echo "
         </div>
 	";
-	
-	

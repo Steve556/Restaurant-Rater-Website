@@ -61,17 +61,24 @@
 		} else {
 			echo "<li>Staff: ".pg_fetch_result($sqlstaffratingdata, 0)."</li>";
 		}
+		
+		if(is_null(pg_fetch_result($sqlratingdata, 0))){
+			echo "<li>No ratings</li>";
+		} else {
+			echo "<li>Number of ratings: ".pg_num_rows($sqlratingdata)."</li>";
+		}
 	echo "	
 					</ul>
                 </div>
 				<div class = 'clear block userInfo'>
                     <ul>
-                        <li>Phone number: $locationrow[3]</li>
-                        <li>Cuisines: $row[2]</li>
+                        <li>Phone number: <text style='color:green'><b>$locationrow[3]</text></b></li>
+                        <li>Restaurant type: $row[2]</li>
 						<li>Opening hours: $locationrow[5] - $locationrow[6]</li>
 						<li>Location: $locationrow[4]</li>
-						<li>Website: <a href='$row[3]' target='_blank'>$row[3]</a></li>
+						<li>Manager name: $locationrow[2]</li>
 						<li>Established in: $locationrow[1]</li>
+						<li>Website: <a href='$row[3]' target='_blank'>$row[3]</a></li>
                     </ul>
                 </div>
                 <div class = 'clear block restaurantlocations'>

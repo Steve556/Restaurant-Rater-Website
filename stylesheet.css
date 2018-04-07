@@ -62,6 +62,10 @@ button:hover {
 	margin: 10px;
 }
 
+.controlBox a {
+	color: black;
+}
+
 .fillableForm input {
 	margin-bottom: 2%;
 }

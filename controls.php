@@ -12,11 +12,12 @@
 				<form action='index.php' method='POST'> 
 					<label for='add'><b>Add a restaurant</b></label>
 					<button type='submit' class='btn' name='add'>Add restaurant</button>
-					<label for='type'><b>Restaurant type</b></label>
-					<input list='restaurantType' name='type' placeholder='Type of Restaurant'><br>
+					<label for='type'><b>Filter restaurant type</b></label>
+					<input list='restaurantType' name='type' placeholder='Type of Restaurant'>
 						<datalist id='restaurantType'>
 							<option value='American'>
 							<option value='British'>
+							<option value='Canadian'>
 							<option value='Caribbean'>
 							<option value='Chinese'>
 							<option value='French'>
@@ -32,7 +33,8 @@
 							<option value='Turkish'>
 							<option value='Vietnamese'>
 						</datalist>
-					
+						<button type='submit'>FILTER</button>
+						<a href='index.php'>RESET</a>
 				</form>
 				<br>
 				<br>

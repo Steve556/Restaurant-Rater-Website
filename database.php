@@ -1,7 +1,12 @@
 <?php
 	include_once 'dbh.php';
 	
-	$sqlget = "SELECT * FROM $project_name.restaurant";
+	if (isset($_POST['type'])){
+		$sqlget = "SELECT * FROM $project_name.restaurant WHERE restauranttype='$_POST[type]'";
+	} else {
+		$sqlget = "SELECT * FROM $project_name.restaurant";
+	}
+	
 	$sqldata = pg_query($conn, $sqlget) or die('error getting data');
 	
 	
@@ -17,6 +22,8 @@
 						<th>Raters</th>
 						<th>Restaurant Type</th>
 						<th>Restaurant Location</th>
+						<th>Manager name</th>
+						<th>Established In</th>
 						<th>Restaurant Website</th>
 						<th>Controls</th>
 					</tr>
@@ -33,12 +40,18 @@
 		$sqlmoodratingdata = pg_query($conn, $sqlgetmoodrating) or die('error getting data');
 		$sqlgetstaffrating = "SELECT ROUND(AVG(RA.staff), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
 		$sqlstaffratingdata = pg_query($conn, $sqlgetstaffrating) or die('error getting data');
-		$sqlgetlocation = "SELECT L.streetaddress FROM $project_name.restaurant AS R INNER JOIN $project_name.location AS L ON R.restaurantid = L.restaurantid WHERE R.restaurantname ='$row[restaurantname]' AND R.restaurantid = '$row[restaurantid]'";
+		$sqlgetlocation = "SELECT * FROM $project_name.restaurant AS R INNER JOIN $project_name.location AS L ON R.restaurantid = L.restaurantid WHERE R.restaurantname ='$row[restaurantname]' AND R.restaurantid = '$row[restaurantid]'";
 		$sqllocationdata = pg_query($conn, $sqlgetlocation) or die('error getting data');
+		$row10 = pg_fetch_row($sqllocationdata);
 		
 		echo "<tr><td>";
+		if (isset($_SESSION['u_id'])){
 			echo "<a href='restaurant.php?restaurantid=".$row['restaurantid']."&userid=".$_SESSION['u_id']."'>$row[restaurantname] </a>";
+		} else {
+			echo "<a href='restaurant.php?restaurantid=".$row['restaurantid']."&userid=0'>$row[restaurantname] </a>";
+		}
 		echo "</td><td>";
+		
 		if(is_null(pg_fetch_result($sqlfoodratingdata, 0))){
 			echo "No ratings";
 		} else {
@@ -61,7 +74,11 @@
 		echo "</td><td>";
 		echo $row['restauranttype'];
 		echo "</td><td>";
-		echo pg_fetch_result($sqllocationdata, 0);
+		echo $row10[8];
+		echo "</td><td>";
+		echo $row10[6];
+		echo "</td><td>";
+		echo $row10[5];
 		echo "</td><td>";
 		echo $row['restaurantwebsite'];
 		echo "</td><td>";
