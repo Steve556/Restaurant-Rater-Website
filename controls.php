@@ -9,10 +9,13 @@
 		if(isset($_SESSION['u_id'])){ // if user is logged in then allow him to see controls
 				
 			echo "
-				<form action='index.php' method='POST'> 
+				<form action='index.php' method='POST'>
 					<label for='add'><b>Add a restaurant</b></label>
 					<button type='submit' class='btn' name='add'>Add restaurant</button>
-					<label for='type'><b>Filter restaurant type</b></label>
+				</form>
+				
+				<form action='index.php' method='POST'> 
+					<label for='type'><b>Filter by restaurant type</b></label>
 					<input list='restaurantType' name='type' placeholder='Type of Restaurant'>
 						<datalist id='restaurantType'>
 							<option value='American'>
@@ -36,6 +39,27 @@
 						<button type='submit'>FILTER</button>
 						<a href='index.php'>RESET</a>
 				</form>
+				
+				<form action='includes/getrestaurantwithnorating.php' method='POST'>
+					<label for='yearwithnorating'><b>Filter restaurant by year with no rating</b></label>
+					<input list='years' name='yearwithnorating' placeholder='Choose a year.'>
+						<datalist id='years'>
+							<option value='2018'>
+							<option value='2017'>
+							<option value='2016'>
+							<option value='2015'>
+							<option value='2014'>
+							<option value='2013'>
+							<option value='2012'>
+							<option value='2011'>
+							<option value='2010'>
+							<option value='2009'>
+							<option value='2008'>
+						</datalist>
+						<button type='submit'>FILTER</button>	
+				</form>
+				
+				
 				<br>
 				<br>
 				";
@@ -67,8 +91,8 @@
 					</fieldset>
 				</form>
 		</div>
-			";
-	};
+		";
+	}
 	
 	echo "</fieldset></div><br><br>";
 	
