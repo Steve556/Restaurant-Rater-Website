@@ -198,7 +198,7 @@
 								$row2[itemdescription]
 							</td>
 							<td>
-								$ $row2[itemprice]
+								$$row2[itemprice]
 							</td>
 						</tr>
 						";
