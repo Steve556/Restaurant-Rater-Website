@@ -76,7 +76,7 @@
 				</form>
 				
 				<form action='index.php' method='POST'>
-					<label for='staffratingeffectlabel'><b>Filter by staff rating</b></label>
+					<label for='staffratingeffectlabel'><b>Filter by staff rating less than: </b></label>
 					<input type='number' name='staffratingeffect' placeholder='1-5' min='1' max='5'></input>
 					<button type='submit' class='btn' name='staffratingeffectbtn'>FILTER</button>
 				</form>

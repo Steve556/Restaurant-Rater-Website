@@ -7,6 +7,12 @@
 	$row = pg_fetch_row($sqldata);
 	$sqlratings = "SELECT R.userid FROM $project_name.rater AS R INNER JOIN $project_name.rating AS RA ON R.userid = RA.userid WHERE R.userid = $_SESSION[u_id]";
 	$sqlratingsdata = pg_query($conn, $sqlratings) or die('error getting data');
+	$sqlgetratings = "	SELECT * 
+						FROM php_project.RATING AS R 
+							INNER JOIN php_project.RESTAURANT AS RA ON R.restaurantid = RA.restaurantid 
+							INNER JOIN php_project.RATER AS RAT ON RAT.userid = R.userid 
+						WHERE R.userid = $_SESSION[u_id]";
+	$sqlratingdata = pg_query($conn, $sqlgetratings) or die('error getting data');
 	
 	echo "
 		<br>
@@ -48,6 +54,17 @@
                 <div class = 'tabs'>
                     <text>Recent Reviews</text>
                 </div>
+		";
+				while($row2 = pg_fetch_array($sqlratingdata, NULL, PGSQL_ASSOC)){ // fetches the data row by row for the ratings of the restaurant
+						echo "<div class = 'commentbox clear'>
+								<img src='https://www.zonkafeedback.com/wp-content/uploads/2015/01/survey-question.jpg' alt='Smiley face' height='42' width='42' align='left'>
+								<br>$row2[restaurantname] <br><br><br>
+								<b>Rated</b>: &nbsp <u>Price</u>: $row2[price] &nbsp <u>Food</u>: $row2[food] &nbsp <u>Mood</u>: $row2[mood] &nbsp <u>Staff</u>: $row2[staff] <br><br>
+								<p><b>Commented:</b> <br><br> '' $row2[comments] ''
+								</p>
+								</div><br>";
+				}
+		echo "
               
                 
                 
