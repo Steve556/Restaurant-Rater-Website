@@ -62,11 +62,14 @@ CREATE TABLE MenuItem
 
 CREATE TABLE RatingItem
 (
+	ratingid SERIAL PRIMARY KEY,
 	userID BIGINT NOT NULL,
 	ratingDate DATE,
 	itemID BIGINT NOT NULL,
 	rating varchar(1),
-	ratingComment varchar(1000)
+	ratingComment varchar(1000),
+	FOREIGN KEY (userID) REFERENCES Rater(userid),
+	FOREIGN KEY (itemid) REFERENCES MenuItem(itemid)
 );
 
 --Inserting into tables
@@ -427,4 +430,5 @@ INSERT INTO Location(firstopendate,managername,phonenumber,streetaddress,opening
 INSERT INTO Location(firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (CURRENT_DATE,'Igor Vditi','+1 (613) 241-3533','137 Murray Street, Ottawa, ON, K1N5M7','11:00AM','2:00AM',13);
 INSERT INTO Location(firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (CURRENT_DATE,'Kane Broadman','+1 (613) 531-2070','370 Elgin Street, Ottawa, ON K2P1N1','11:30AM','2:00AM',14);
 INSERT INTO Location(firstopendate,managername,phonenumber,streetaddress,openinghour,closinghour,restaurantid) VALUES (CURRENT_DATE,'Mike Wugsk','+1 (613) 564-2222','416 Preston Street, Ottawa, ON K1S4M9','5:00PM','10:00PM',15);
+
 

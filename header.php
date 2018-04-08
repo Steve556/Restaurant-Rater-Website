@@ -58,7 +58,7 @@
 						<li><a href="index.php">Home</a></li>
 						<?php
 							if(isset($_SESSION['u_id'])){
-								echo "<li><a href='profile.php'>Profile</a></li>";
+								echo "<li><a href='profile.php?userid=$_SESSION[u_id]&useridloggedin=$_SESSION[u_id]'>Profile</a></li>";
 							}
 						?>
 						<li><a href="raters.php">Raters</a></li>

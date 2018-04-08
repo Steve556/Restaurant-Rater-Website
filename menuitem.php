@@ -9,8 +9,7 @@
 	//make this find ratings for menuitem
 	$sqlratings = "	SELECT R.userid 
 					FROM php_project.rater AS R
-						INNER JOIN php_project.ratingitem AS RA ON R.userid = RA.userid
-					WHERE R.userid = 1";
+						INNER JOIN php_project.ratingitem AS RA ON R.userid = RA.userid";
 	$sqlratingsdata = pg_query($conn, $sqlratings) or die('error getting data');
 	
 	//find restaurants that use this item
@@ -26,12 +25,27 @@
 						WHERE R.itemid = $_GET[itemid]";
 	$sqlratingdata = pg_query($conn, $sqlgetratings) or die('error getting data');
 	
+	$sqlgetuserrating = "	SELECT * 
+							FROM $project_name.ratingitem AS R
+								INNER JOIN $project_name.rater as RA ON R.userid = RA.userid
+							WHERE RA.userid = $_GET[useridloggedin] AND R.itemid = $_GET[itemid]";
+	$sqluserratingdata = pg_query($conn, $sqlgetuserrating) or die('error getting data');
+	
 	echo "
 		<br>
         <br>
 		<div class = 'wrapper'>
             <div class = 'layoutleft'>
                 <div class = 'block'>
+		";
+					if (isset($_SESSION['u_id']) & pg_num_rows($sqluserratingdata) < 1){					
+						echo "
+								<form action='menuitem.php?itemid=$_GET[itemid]&useridloggedin=$_GET[useridloggedin]' method='POST'>
+									<button type='submit' class='btn' name='rate'>Rate Me!</button><br><br>
+								</form>
+							";
+					}
+	echo "
                     <text> <b>$row[1]</b> </text><br><br>
 					<div id='restaurantimage'></div>
                 </div>
@@ -56,29 +70,42 @@
 				while($row1 = pg_fetch_array($sqlrestaurantsdata, NULL, PGSQL_ASSOC)){ // fetches the data row by row for the locations of restaurant
 					echo "<li>$row1[restaurantname]</li>";
 				}
-    echo"       </div>
+    echo"       </div></div>";
        
-            </div>
-            <div class = 'layoutcenter'>
-                <div class = 'tabs'>
-                    <text>Recent Reviews</text>
-                </div>  
-		";
-			while($row2 = pg_fetch_array($sqlratingdata, NULL, PGSQL_ASSOC)){ // fetches the data row by row for the ratings of the restaurant
-				echo "	<div class = 'commentbox clear'>
-						<img src='https://png.pngtree.com/element_origin_min_pic/17/07/21/7507595ce4bd95c7f36f43332c6a5647.jpg' alt='Smiley face' height='42' width='42' align='left'>
-						<br>$row2[firstname] $row2[lastname] (<b>$row2[username]</b>) <br><br><br>
-						<b>Rated</b>: &nbsp $row2[rating] <br><br>
-						<p><b>Commented:</b> <br><br> '' $row2[ratingcomment] ''
-						</p>
-						</div><br>";
+			if(isset($_POST['rate'])){
+					echo "
+						<div class = 'layoutcenter'>
+							<div class='fillableForm'>
+								<form action='includes/addmenuitemrating.php?itemid=$_GET[itemid]&userid=$_SESSION[u_id]' method='POST'>
+									<fieldset class='field_set'>
+										<legend>Fill Form</legend>
+										<p>Please fill in this form to rate the <b>menu item</b>.</p><br>
+										<label for='rating'><b>Rating </b></label>
+										<input type='text' name='rating' placeholder='Answer from 1-5' maxlength='1'><br>
+										<label for='comments'><b>Comment</b></label>
+										<input type='comments' name='comments' placeholder='Enter a comment' maxlength='419'><br>
+										<button type='submit' style='margin: 1%;'>RATE MENU ITEM</button>
+									</fieldset>
+								</form>
+							</div>
+						</div>
+					";			
+			} else {
+				echo "
+				<div class = 'layoutcenter'>
+					<div class = 'tabs'>
+						<text>Recent Reviews</text>
+					</div>  
+					";
+				while($row2 = pg_fetch_array($sqlratingdata, NULL, PGSQL_ASSOC)){ // fetches the data row by row for the ratings of the restaurant
+					echo "	<div class = 'commentbox clear'>
+							<img src='https://png.pngtree.com/element_origin_min_pic/17/07/21/7507595ce4bd95c7f36f43332c6a5647.jpg' alt='Smiley face' height='42' width='42' align='left'>
+							<br>$row2[firstname] $row2[lastname] (<b>$row2[username]</b>) <br><br><br>
+							<b>Rated</b>: &nbsp $row2[rating] <br><br>
+							<p><b>Commented:</b> <br><br> '' $row2[ratingcomment] ''
+							</p>
+							</div><br>";
+				}
+				echo "</div>";
 			}
-		echo "
-
-
-				
-            </div>
-		
-            
-        </div>
-	";
+	echo "</div>";

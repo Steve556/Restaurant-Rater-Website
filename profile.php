@@ -2,16 +2,16 @@
     include_once 'header.php';
 	include_once 'dbh.php';
 	
-	$sql = "SELECT joindate FROM $project_name.rater WHERE userid = $_SESSION[u_id]";
+	$sql = "SELECT * FROM $project_name.rater WHERE userid = $_GET[userid]";
 	$sqldata = pg_query($conn, $sql) or die('error getting data');
 	$row = pg_fetch_row($sqldata);
-	$sqlratings = "SELECT R.userid FROM $project_name.rater AS R INNER JOIN $project_name.rating AS RA ON R.userid = RA.userid WHERE R.userid = $_SESSION[u_id]";
+	$sqlratings = "SELECT R.userid FROM $project_name.rater AS R INNER JOIN $project_name.rating AS RA ON R.userid = RA.userid WHERE R.userid = $_GET[userid]";
 	$sqlratingsdata = pg_query($conn, $sqlratings) or die('error getting data');
 	$sqlgetratings = "	SELECT * 
 						FROM php_project.RATING AS R 
 							INNER JOIN php_project.RESTAURANT AS RA ON R.restaurantid = RA.restaurantid 
 							INNER JOIN php_project.RATER AS RAT ON RAT.userid = R.userid 
-						WHERE R.userid = $_SESSION[u_id]";
+						WHERE R.userid = $_GET[userid]";
 	$sqlratingdata = pg_query($conn, $sqlgetratings) or die('error getting data');
 	
 	echo "
@@ -20,7 +20,7 @@
 		<div class = 'wrapper'>
             <div class = 'layoutleft'>
                 <div class = 'block'>
-                    <text> <b>$_SESSION[u_first] $_SESSION[u_last]</b> </text><br><br>
+                    <text> <b>$row[2] $row[3]</b> </text><br><br>
 					<div id='avatar'></div>
                 </div>
 				<div class = 'clear block userInfo'>
@@ -33,7 +33,7 @@
                 </div>
                 <div class = 'clear block userActivity'>
                     <ul>
-                        <li>Date Joined: $row[0]</li>
+                        <li>Date Joined: $row[4]</li>
                     </ul>
                 </div>
                 <div class = 'subBlock clear'> 
