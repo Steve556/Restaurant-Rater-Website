@@ -1,5 +1,7 @@
 <?php 
 
+	$restauranttypes = array("American", "British", "Canadian", "Caribbean", "Chinese", "French", "Greek", "Indian", "Italian" , "Japanese", "Mediterranean", "Mexican", "Moroccan", "Spanish", "Thai", "Turkish", "Vietnam");
+
 	echo "
 	
 		<div class='wrapper controlBox'> 		
@@ -37,7 +39,6 @@
 							<option value='Vietnamese'>
 						</datalist>
 						<button type='submit'>FILTER</button>
-						<a href='index.php'>RESET</a>
 				</form>
 				
 				<form action='index.php' method='POST'>
@@ -80,7 +81,20 @@
 					<button type='submit' class='btn' name='staffratingeffectbtn'>FILTER</button>
 				</form>
 				
+				<form action='index.php' method='POST'>
+					<label for='restaurantTypelabel'><b>Details of restaurant type with highest food rating</b></label>
+					<input list='restaurantTypes' name='types' placeholder='Choose a restaurant type'>
+						<datalist id='restaurantTypes'>
+		";
+					for ($x = 0; $x < sizeof($restauranttypes); $x++) {
+						echo "<option value='".$restauranttypes[$x]."'>";
+					}
+		echo "
+						</datalist>
+					<button type='submit' class='btn' name='restaurantTypeBtn'>FILTER</button>
+				</form>
 				
+				<a href='index.php'>RESET A FILTER</a>
 				<br>
 				<br>
 				";
@@ -113,6 +127,38 @@
 				</form>
 		</div>
 		";
+	} else if(isset($_POST['types'])){
+		echo "
+			<table class='wrapper'>
+				<thead>
+					<tr>
+						<th>Restaurant Type</th>
+						<th>Restaurant Name</th>
+						<th>Rater Name</th>
+						<th>Food Ratings</th>
+		";
+		
+		echo "</thead></tr><tbody>";
+		
+		$sqlstatement = "	SELECT DISTINCT Restaurant.restauranttype, Restaurant.restaurantname, Rater.firstname, Rater.lastname, Rating.food
+									FROM php_project.rater
+										INNER JOIN php_project.rating ON Rater.userid=Rating.userid
+										INNER JOIN php_project.restaurant ON Rating.restaurantid=Restaurant.restaurantid
+									WHERE Rating.food = (SELECT MAX(RA.food) FROM php_project.Rating AS RA) and Restaurant.restauranttype='".$_POST['types']."'";
+		include_once 'dbh.php';
+		$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
+		
+		while($row = pg_fetch_array($sqldata1, NULL, PGSQL_ASSOC)){ // fetches the data row by row
+			echo "	<tr>
+						<td>".$row['restauranttype']."</td>
+						<td>".$row['restaurantname']."</td>
+						<td>".$row['firstname']." ".$row['lastname']."</td>
+						<td>".$row['food']."</td>
+					</tr>						
+				";
+		}
+		
+		echo "</tbody></table>";		
 	}
 	
 	echo "</fieldset></div><br><br>";
