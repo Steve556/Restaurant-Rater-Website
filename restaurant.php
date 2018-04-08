@@ -180,7 +180,13 @@
 								$num.
 							</td>
 							<td>
-								$row2[itemname]
+						";
+								if (isset($_SESSION['u_id'])){
+									echo "<a href='menuitem.php?itemid=".$row2['itemid']."&useridloggedin=".$_SESSION['u_id']."'>$row2[itemname] </a>";
+								} else {
+									echo "<a href='menuitem.php?itemid=".$row2['itemid']."&useridloggedin=0'>$row2[itemname] </a>";
+								}
+					echo "
 							</td>
 							<td>
 								$row2[itemtype]
