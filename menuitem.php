@@ -16,7 +16,6 @@
 	//find restaurants that use this item
 	$sqlrestaurants = "	SELECT *
 						FROM php_project.menuitem AS M
-							INNER JOIN php_project.ratingitem AS RA ON RA.itemid = M.itemid
 							INNER JOIN php_project.restaurant AS R ON R.restaurantid = M.restaurantid
 						WHERE M.itemid = $_GET[itemid]";
 	$sqlrestaurantsdata = pg_query($conn, $sqlrestaurants);

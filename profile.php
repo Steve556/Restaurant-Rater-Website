@@ -58,7 +58,7 @@
 				while($row2 = pg_fetch_array($sqlratingdata, NULL, PGSQL_ASSOC)){ // fetches the data row by row for the ratings of the restaurant
 						echo "<div class = 'commentbox clear'>
 								<img src='https://www.zonkafeedback.com/wp-content/uploads/2015/01/survey-question.jpg' alt='Smiley face' height='42' width='42' align='left'>
-								<br>$row2[restaurantname] <br><br><br>
+								<br><b>$row2[restaurantname]</b><br><br><br>
 								<b>Rated</b>: &nbsp <u>Price</u>: $row2[price] &nbsp <u>Food</u>: $row2[food] &nbsp <u>Mood</u>: $row2[mood] &nbsp <u>Staff</u>: $row2[staff] <br><br>
 								<p><b>Commented:</b> <br><br> '' $row2[comments] ''
 								</p>

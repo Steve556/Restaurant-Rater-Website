@@ -1,6 +1,7 @@
 <?php 
 
 	$restauranttypes = array("American", "British", "Canadian", "Caribbean", "Chinese", "French", "Greek", "Indian", "Italian" , "Japanese", "Mediterranean", "Mexican", "Moroccan", "Spanish", "Thai", "Turkish", "Vietnam");
+	$categories = array("Breakfast", "Lunch", "Soups", "Sides", "Starter", "Tacos", "NotTacos", "Dessert", "Cocktails", "Beer", "Wine", "Tequila", "Coffee", "Poutine", "Main");
 
 	echo "
 	
@@ -12,8 +13,13 @@
 				
 			echo "
 				<form action='index.php' method='POST'>
-					<label for='add'><b>Add a restaurant</b></label>
-					<button type='submit' class='btn' name='add'>Add restaurant</button>
+					<label for='addrestaurant'><b>Add a restaurant</b></label>
+					<button type='submit' class='btn' name='addrestaurant'>Add restaurant</button>
+				</form>
+				
+				<form action='index.php' method='POST'>
+					<label for='addmenuitem'><b>Add a menu item</b></label>
+					<button type='submit' class='btn' name='addmenuitem'>Add Menu Item</button>
 				</form>
 				
 				<form action='index.php' method='POST'> 
@@ -76,7 +82,7 @@
 				</form>
 				
 				<form action='index.php' method='POST'>
-					<label for='staffratingeffectlabel'><b>Filter by staff rating less than: </b></label>
+					<label for='staffratingeffectlabel'><b>Filter by staff rating less than </b></label>
 					<input type='number' name='staffratingeffect' placeholder='1-5' min='1' max='5'></input>
 					<button type='submit' class='btn' name='staffratingeffectbtn'>FILTER</button>
 				</form>
@@ -102,7 +108,7 @@
 			echo "<b>You must be logged in to view controls to alter with database!<br><br></b>";
 		}
 	
-	if(isset($_POST['add'])){
+	if(isset($_POST['addrestaurant'])){
 		echo "
 		<div class='fillableForm'>
 			<form action='includes/addRestaurant.inc.php' method='POST'>
@@ -110,23 +116,80 @@
 						<legend>Fill Form</legend>
 						<p>Please fill in this form to add a <b>restaurant</b>.</p><br>
 						<label for='name'><b>Restaurant name</b></label>
-						<input type='text' name='name' placeholder='Enter restaurant name'><br>
+						<input type='text' name='name' placeholder='Enter restaurant name' maxlength='127'><br>
 						<label for='type'><b>Restaurant type</b></label>
-						<input list='restaurantType' name='type' placeholder='Type of Restaurant'><br>
+						<input list='restaurantType' name='type' placeholder='Type of Restaurant' maxlength='31'><br>
 						<datalist id='restaurantType'>
 							<option value='Blog'>
 							<option value='Online'>
 							<option value='Food Critic'>
 						</datalist>
 						<label for='website'><b>Restaurant website</b></label>
-						<input type='text' name='website' placeholder='Enter restaurant website'><br>
+						<input type='text' name='website' placeholder='Enter restaurant website' maxlength='127'><br>
 						<label for='address'><b>Restaurant address</b></label>
-						<input type='text' name='address' placeholder='Enter restaurant address'><br>
+						<input type='text' name='address' placeholder='Enter restaurant address' maxlength='255'><br>
+						<label for='establishedin'><b>Established In</b></label>
+						<input type='date' name='establishedin'><br>
+						<label for='managername'><b>Manager name</b></label>
+						<input type='text' name='managername' placeholder='Enter his/her name' maxlength='127'><br>
+						<label for='phonenumber'><b>Restaurant's phone number</b></label>
+						<input type='text' name='phonenumber' placeholder='Enter phonenumber' maxlength='31'><br>
+						<label for='openinghour'><b>Opening hour</b></label>
+						<input type='text' name='openinghour' placeholder='Enter opening hours' maxlength='9'><br>
+						<label for='closinghour'><b>Closing hour</b></label>
+						<input type='text' name='closinghour' placeholder='Enter closing hours' maxlength='9'><br>
 						<button type='submit' style='margin: 1%;'>ADD RESTAURANT</button>
 					</fieldset>
 				</form>
 		</div>
 		";
+	} else if(isset($_POST['addmenuitem'])){
+		echo "
+		<div class='fillableForm'>
+			<form action='includes/addMenuItem.inc.php' method='POST'>
+					<fieldset class='field_set'>
+						<legend>Fill Form</legend>
+						<p>Please fill in this form to add a <b>menu item</b>.</p><br>
+						<label for='itemName'><b>Item name</b></label>
+						<input type='text' name='itemName' placeholder='Enter item name' maxlength='127'><br>
+						<label for='itemType'><b>Restaurant type</b></label>
+						<input list='itemType' name='itemType' placeholder='Type of item' maxlength='31'><br>
+						<datalist id='itemType'>
+							<option value='Food'>
+							<option value='Drink'>
+						</datalist>
+						<label for='itemCategory'><b>Item category</b></label>
+						<input list='itemCategory' name='itemCategory' placeholder='Category of item' maxlength='31'><br>
+						<datalist id='itemCategory'>
+		";
+						for ($x = 0; $x < sizeof($categories); $x++) {
+							echo "<option value='".$categories[$x]."'>";
+						}
+		echo "
+						</datalist>
+						<label for='itemDescription'><b>Item description</b></label>
+						<input type='text' name='itemDescription' placeholder='Enter description of item' maxlength='419'><br>
+						<label for='itemPrice'><b>Item price</b></label>
+						<input type='text' name='itemPrice' placeholder='Enter price of item' maxlength='5'><br>
+						<label for='restaurant'><b>Restaurant</b></label>
+						<input list='restaurants' name='restaurant' placeholder='Choose a restaurant' maxlength='31'><br>
+						<datalist id='restaurants'>
+			";
+						include_once 'dbh.php';
+						$sqlget = "	SELECT DISTINCT restaurantname
+									FROM $project_name.restaurant 
+									ORDER BY restaurantname ASC";
+						$sqldata = pg_query($conn, $sqlget) or die('error getting data');
+						while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){
+							echo "<option value='".$row['restaurantname']."'>";
+						}
+		echo "
+						</datalist>
+						<button type='submit' style='margin: 1%;'>ADD MENU ITEM</button>
+					</fieldset>
+			</form>
+		</div>
+		";		
 	} else if(isset($_POST['types'])){
 		echo "
 			<table class='wrapper'>
