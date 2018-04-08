@@ -74,10 +74,10 @@
 						<button type='submit'>FILTER</button>	
 				</form>
 				
-				<form action='footer.php' method='POST'>
-					<label for='staffratingeffect'><b>Filter by staff rating</b></label>
-					<input type='text' name='staffratingeffect' placeholder='Put a number from 1-5' maxlength='1'>
-					<button type='submit' class='btn' name='staffratingeffect'>FILTER</button>
+				<form action='index.php' method='POST'>
+					<label for='staffratingeffectlabel'><b>Filter by staff rating</b></label>
+					<input type='number' name='staffratingeffect' placeholder='1-5' min='1' max='5'></input>
+					<button type='submit' class='btn' name='staffratingeffectbtn'>FILTER</button>
 				</form>
 				
 				

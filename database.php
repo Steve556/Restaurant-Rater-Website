@@ -9,8 +9,8 @@
                    WHERE R.restaurantid NOT IN (SELECT RA.restaurantid
 						                    FROM $project_name.rating AS RA
 						                    WHERE EXTRACT(YEAR FROM ratingdate) = '$_POST[years]' AND EXTRACT(MONTH FROM ratingdate) = '$_POST[months]');";
-	} else if (isset($_GET['staffratingeffect'])){
-		$int = (int)$_GET['staffratingeffect'];
+	} else if (isset($_POST['staffratingeffect'])){
+		$int = (int)$_POST['staffratingeffect'];
 		$sqlget = "	SELECT *
 					FROM $project_name.restaurant AS R
 					WHERE R.restaurantID IN (SELECT DISTINCT RA.restaurantid

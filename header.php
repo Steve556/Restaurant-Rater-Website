@@ -61,6 +61,8 @@
 								echo "<li><a href='profile.php'>Profile</a></li>";
 							}
 						?>
+						<li><a href="index.php">Raters</a></li>
+						<li><a href="index.php">Menu Items</a></li>
 						<li><a href="help.php">Help</a></li>
 					</ul>
 				</div>
