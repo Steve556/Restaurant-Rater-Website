@@ -48,7 +48,7 @@
 				</form>
 				
 				<form action='index.php' method='POST'>
-					<label for='yearwithnorating'><b>Filter restaurant by year with no rating</b></label>
+					<label for='yearwithnorating'><b>Filter restaurant by year and month with no rating</b></label>
 					<input list='years' name='years' placeholder='Choose a year.'>
 						<datalist id='years'>
 							<option value='2018'>
@@ -98,6 +98,12 @@
 		echo "
 						</datalist>
 					<button type='submit' class='btn' name='restaurantTypeBtn'>FILTER</button>
+				</form>
+				
+				<form action='index.php' method='GET'>
+					<label for='restauranttypemorepopularthanothers'><b>Is restaurant type X more popular than others? </b></label>
+					<input list='restaurantTypes' name='restauranttypemorepopularthanothers' placeholder='Choose a restaurant type'>
+					<button type='submit' class='btn' name='btn1'>ANSWER ME</button>
 				</form>
 				
 				<a href='index.php'>RESET A FILTER</a>
@@ -222,6 +228,30 @@
 		}
 		
 		echo "</tbody></table>";		
+	} else if (isset($_GET['restauranttypemorepopularthanothers'])){
+		include_once 'dbh.php';
+		$sqlget = "	SELECT * 
+					FROM $project_name.restaurant";
+		$sqldata = pg_query($conn, $sqlget) or die('error getting data');
+		
+		$arrayOfNumberOfRatings = array_fill(0, sizeof($restauranttypes), 0);
+		$x = 0;		
+		while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){
+			$sqlgetraters = "	SELECT * 
+								FROM $project_name.restaurant AS R 
+									INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid 
+								WHERE R.restauranttype = '$restauranttypes[$x]'";
+			$sqlratersdata = pg_query($conn, $sqlgetraters) or die('error getting data');
+			$arrayOfNumberOfRatings[$x] = pg_num_rows($sqlratersdata);
+			$x++;
+		}
+		$x = array_search($_GET['restauranttypemorepopularthanothers'], $restauranttypes);
+		
+		if (max($arrayOfNumberOfRatings) ==  $arrayOfNumberOfRatings[$x]) {
+			echo "<text style='color: red'><b>YES</b></text>";
+		} else {
+			echo "<text style='color: red'><b>NO</b></text>";
+		}
 	}
 	
 	echo "</fieldset></div><br><br>";
