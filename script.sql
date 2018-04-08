@@ -56,7 +56,7 @@ CREATE TABLE MenuItem
 	itemType varchar(64),
 	itemCategory varchar(64),
 	itemDescription varchar(420),
-	itemPrice INT,
+	itemPrice NUMERIC(5,2),
 	restaurantID BIGINT NOT NULL
 );
 

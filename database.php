@@ -9,6 +9,14 @@
                    WHERE R.restaurantid NOT IN (SELECT RA.restaurantid
 						                    FROM $project_name.rating AS RA
 						                    WHERE EXTRACT(YEAR FROM ratingdate) = '$_POST[years]' AND EXTRACT(MONTH FROM ratingdate) = '$_POST[months]');";
+	} else if (isset($_GET['staffratingeffect'])){
+		$int = (int)$_GET['staffratingeffect'];
+		$sqlget = "	SELECT *
+					FROM $project_name.restaurant AS R
+					WHERE R.restaurantID IN (SELECT DISTINCT RA.restaurantid
+												FROM $project_name.rating AS RA
+												WHERE RA.staff < $int);
+					";
 	} else {
 		$sqlget = "SELECT * FROM $project_name.restaurant";
 	}
@@ -18,7 +26,7 @@
 	
 	
 	echo "
-			<table class='wrapper databasetable'>
+			<table class='wrapper'>
 				<thead>
 					<tr>
 						<th>Restaurant Name</th>
@@ -97,5 +105,36 @@
 		echo "</td></tr>";	
 	}
 	
+	echo "</tbody></table>";
+	
+	echo "
+			<br>
+			<table class='wrapper'>
+				<thead>
+					<tr>
+						<th>Restaurant Type</th>
+		";
+	$categories = array("Breakfast", "Lunch", "Soups", "Sides", "Starter", "Tacos", "NotTacos", "Dessert", "Cocktails", "Beer", "Wine", "Tequila", "Coffee", "Poutine", "Main");
+	$restauranttypes = array("American", "British", "Canadian", "Caribbean", "Chinese", "French", "Greek", "Indian", "Italian" , "Japanese", "Mediterranean", "Mexican", "Moroccan", "Spanish", "Thai", "Turkish", "Vietnam");
+	
+	for ($x = 0; $x < sizeof($categories); $x++) {
+		echo "<th>".$categories[$x]." Category</th>";
+	}
+	
+	echo "</thead></tr><tbody>";
+	
+	for ($x = 0; $x < sizeof($restauranttypes); $x++){
+		echo "<tr><td>".$restauranttypes[$x]."</td>";
+		for ($y = 0; $y < sizeof($categories); $y++){
+			$sqlstatement = "SELECT ROUND(AVG(avgprice),2) FROM (SELECT Menuitem.itemprice as avgprice, Menuitem.itemcategory as ItemCat FROM php_project.menuitem INNER JOIN php_project.restaurant ON Restaurant.restaurantid=MenuItem.restaurantID WHERE restauranttype='$restauranttypes[$x]' and itemcategory='$categories[$y]') menuitem";
+			$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
+			if (is_null(pg_fetch_result($sqldata1, 0))){
+				echo "<td>0.00</td>";
+			} else {
+				echo "<td>".pg_fetch_result($sqldata1, 0)."</td>";
+			}
+		}
+		echo "</tr>";		
+	}
 	echo "</tbody></table>";
 	
