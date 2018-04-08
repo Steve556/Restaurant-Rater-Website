@@ -1,0 +1,6 @@
+SELECT
+COUNT(Total)
+FROM (SELECT Restaurant.restauranttype as ResType, Restaurant.restaurantname as ResName
+FROM php_project.restaurant
+INNER JOIN php_project.rating ON Restaurant.restaurantid=Rating.restaurantid
+	 WHERE restauranttype='American') AS Total 
