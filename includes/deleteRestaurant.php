@@ -9,6 +9,10 @@ if(isset($_POST['delete'])){
 		pg_query($conn , $DeleteQuery) or die('error getting data');
 		$DeleteQuery = "DELETE FROM $project_name.rating WHERE restaurantid ='$_POST[hidden]';";       
 		pg_query($conn , $DeleteQuery) or die('error getting data');
+		$DeleteQuery = "DELETE FROM $project_name.ratingitem WHERE itemid IN (	SELECT itemid
+																				FROM php_project.menuitem
+																				WHERE restaurantid ='$_POST[hidden]');";       
+		pg_query($conn , $DeleteQuery) or die('error getting data');
 		$DeleteQuery = "DELETE FROM $project_name.menuitem WHERE restaurantid ='$_POST[hidden]';";       
 		pg_query($conn , $DeleteQuery) or die('error getting data');
 }

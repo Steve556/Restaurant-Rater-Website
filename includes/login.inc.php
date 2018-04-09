@@ -17,7 +17,7 @@
 			$result = pg_query($conn, $sql);
 			$resultCheck = pg_num_rows($result);
 			if ($resultCheck < 1) {
-				header('Location: ../index.php?login=here');
+				header('Location: ../index.php?login="notValidUsernameOrPassword"');
 				exit();			
 			} else {
 				if ($row = pg_fetch_assoc($result)){

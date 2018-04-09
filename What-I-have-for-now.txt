@@ -1,7 +1,0 @@
-SELECT Rater.firstname as fname, Rater.lastname as lname, Rater.joindate as jdate, Rater.reputation as rep, Restaurant.restaurantname as rname, Rating.ratingdate as rdate
-FROM php_project.rater
-INNER JOIN php_project.rating ON Rater.userid=Rating.userid
-INNER JOIN php_project.restaurant ON Rating.restaurantid=Restaurant.restaurantid
-	WHERE Rating.food = (	SELECT MAX(RA.food)
-							FROM php_project.rating AS RA) AND Rating.mood = (	SELECT MAX(RM.mood)
-																				FROM php_project.rating AS RM)

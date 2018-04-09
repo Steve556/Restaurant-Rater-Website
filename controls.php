@@ -251,10 +251,10 @@
 		echo "</thead></tr><tbody>";
 		
 		$sqlstatement = "	SELECT DISTINCT Restaurant.restauranttype, Restaurant.restaurantname, Rater.firstname, Rater.lastname, Rating.food
-									FROM php_project.rater
-										INNER JOIN php_project.rating ON Rater.userid=Rating.userid
-										INNER JOIN php_project.restaurant ON Rating.restaurantid=Restaurant.restaurantid
-									WHERE Rating.food = (SELECT MAX(RA.food) FROM php_project.Rating AS RA) and Restaurant.restauranttype='".$_POST['types']."'";
+									FROM $project_name.rater
+										INNER JOIN $project_name.rating ON Rater.userid=Rating.userid
+										INNER JOIN $project_name.restaurant ON Rating.restaurantid=Restaurant.restaurantid
+									WHERE Rating.food = (SELECT MAX(RA.food) FROM $project_name.Rating AS RA) and Restaurant.restauranttype='".$_POST['types']."'";
 		include_once 'dbh.php';
 		$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
 		
@@ -345,9 +345,9 @@
 		for ($x = 0; $x < sizeof($new_array); $x++){
 			
 			$sqlstatement = "	SELECT *
-									FROM php_project.rater AS R
-										INNER JOIN php_project.rating AS RA ON R.userid=RA.userid
-										INNER JOIN php_project.restaurant AS RE ON RA.restaurantid=RE.restaurantid
+									FROM $project_name.rater AS R
+										INNER JOIN $project_name.rating AS RA ON R.userid=RA.userid
+										INNER JOIN $project_name.restaurant AS RE ON RA.restaurantid=RE.restaurantid
 									WHERE R.userid = '".$arrayOfUserIds[$new_array[$x]]."'";
 			
 			$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
@@ -409,10 +409,10 @@
 		for ($x = 0; $x < sizeof($new_array); $x++){
 												
 			$sqlstatement = "		SELECT *
-									FROM php_project.rater 
-										INNER JOIN php_project.ratingitem ON Rater.userid=Ratingitem.userid
-										INNER JOIN php_project.menuitem ON Ratingitem.itemid=Menuitem.itemid
-										INNER JOIN php_project.restaurant ON Menuitem.restaurantid=Restaurant.restaurantid
+									FROM $project_name.rater 
+										INNER JOIN $project_name.ratingitem ON Rater.userid=Ratingitem.userid
+										INNER JOIN $project_name.menuitem ON Ratingitem.itemid=Menuitem.itemid
+										INNER JOIN $project_name.restaurant ON Menuitem.restaurantid=Restaurant.restaurantid
 									WHERE Rater.userid='".$arrayOfUserIds[$new_array[$x]]."' and Restaurant.restaurantname='".$_POST['restaurant']."'";
 									
 			$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
@@ -431,13 +431,13 @@
 		echo "</tbody></table>";
 	} else if (isset($_POST['btn7'])){
 		$sql = "SELECT *
-				FROM php_project.rater AS RAT
+				FROM $project_name.rater AS RAT
 				WHERE RAT.userid IN (	SELECT RA.userid 
-										FROM php_project.rating AS RA
+										FROM $project_name.rating AS RA
 										WHERE (RA.price+RA.food+RA.mood+RA.staff) < ANY(SELECT (RATE.price+RATE.food+RATE.mood+RATE.staff) 
-																						FROM php_project.rating as RATE 
+																						FROM $project_name.rating as RATE 
 																						WHERE RATE.userid IN (	SELECT RATER.userid 
-																												FROM php_project.rater AS RATER 
+																												FROM $project_name.rater AS RATER 
 																												WHERE RATER.firstname='".$_POST['firstname']."')))";
 		$sqldata = pg_query($conn, $sql) or die('error getting data');
 		

@@ -8,9 +8,9 @@
 	$sqlratings = "SELECT R.userid FROM $project_name.rater AS R INNER JOIN $project_name.rating AS RA ON R.userid = RA.userid WHERE R.userid = $_GET[userid]";
 	$sqlratingsdata = pg_query($conn, $sqlratings) or die('error getting data');
 	$sqlgetratings = "	SELECT * 
-						FROM php_project.RATING AS R 
-							INNER JOIN php_project.RESTAURANT AS RA ON R.restaurantid = RA.restaurantid 
-							INNER JOIN php_project.RATER AS RAT ON RAT.userid = R.userid 
+						FROM $project_name.RATING AS R 
+							INNER JOIN $project_name.RESTAURANT AS RA ON R.restaurantid = RA.restaurantid 
+							INNER JOIN $project_name.RATER AS RAT ON RAT.userid = R.userid 
 						WHERE R.userid = $_GET[userid]";
 	$sqlratingdata = pg_query($conn, $sqlgetratings) or die('error getting data');
 	

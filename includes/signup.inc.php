@@ -30,20 +30,21 @@ if(empty($firstname) || empty($lastname) || empty($username) || empty($password1
 			if (!filter_var($emailaddress2, FILTER_VALIDATE_EMAIL)){
 				header('Location: ../signup.php?error=invalidEmail');
 				exit();
-			} else if ($emailaddress1 != $emailaddress2) {
+			} else if ($emailaddress1 != $emailaddress2 ) {
 				header('Location: ../signup.php?error=emailsNotMatching');
 				exit();
 			} else {
-				if ($pwd1 != $pwd2){
+				if ($password1 != $password2){
 					header('Location: ../signup.php?error=passwordsNotMatching');
 					exit();
 				} else {
 					//Hash password
 					//$hashedPwd = password_hash($password2, PASSWORD_DEFAULT); //removed to make it easier to insert data on database
 					//Insert user into database
-					$sql = "INSERT INTO $project_name.rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('$emailaddress','$firstname', '$lastname', CURRENT_DATE,'$usertype', '1', '$password2', '$username')";
+					$sql = "INSERT INTO $project_name.rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) 
+							VALUES ('$emailaddress2','$firstname', '$lastname', CURRENT_DATE,'$usertype', '1', '$password2', '$username')";
 					$result = pg_query($conn, $sql);
-					header('Location: ../index.php');
+					header('Location: ../index.php?success=addedNewUser');
 				}
 			}
 		}

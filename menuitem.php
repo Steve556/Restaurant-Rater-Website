@@ -8,20 +8,23 @@
 	
 	//make this find ratings for menuitem
 	$sqlratings = "	SELECT R.userid 
-					FROM php_project.rater AS R
-						INNER JOIN php_project.ratingitem AS RA ON R.userid = RA.userid";
+					FROM $project_name.rater AS R
+						INNER JOIN $project_name.ratingitem AS RA ON R.userid = RA.userid
+						WHERE RA.itemid = ".$_GET['itemid']."";
 	$sqlratingsdata = pg_query($conn, $sqlratings) or die('error getting data');
 	
 	//find restaurants that use this item
 	$sqlrestaurants = "	SELECT *
-						FROM php_project.menuitem AS M
-							INNER JOIN php_project.restaurant AS R ON R.restaurantid = M.restaurantid
-						WHERE M.itemid = $_GET[itemid]";
+						FROM $project_name.menuitem AS M
+							INNER JOIN $project_name.restaurant AS R ON R.restaurantid = M.restaurantid
+						WHERE M.itemname =  (SELECT DISTINCT itemname
+											FROM $project_name.menuitem AS L
+										    WHERE L.itemid = $_GET[itemid])";
 	$sqlrestaurantsdata = pg_query($conn, $sqlrestaurants);
 	
 	$sqlgetratings = "	SELECT * 
-						FROM php_project.RATINGITEM AS R 
-							INNER JOIN php_project.RATER AS RAT ON RAT.userid = R.userid 
+						FROM $project_name.RATINGITEM AS R 
+							INNER JOIN $project_name.RATER AS RAT ON RAT.userid = R.userid 
 						WHERE R.itemid = $_GET[itemid]";
 	$sqlratingdata = pg_query($conn, $sqlgetratings) or die('error getting data');
 	

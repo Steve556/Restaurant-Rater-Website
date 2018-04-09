@@ -8,7 +8,13 @@
 	$sqlforlocationtable = "SELECT * FROM $project_name.location WHERE restaurantid = $_GET[restaurantid]";
 	$sqllocationdata = pg_query($conn, $sqlforlocationtable) or die('error getting data');
 	$locationrow = pg_fetch_row($sqllocationdata);
-	$sqlgetotherlocations = "SELECT L.streetaddress FROM $project_name.restaurant AS R INNER JOIN $project_name.location AS L ON R.restaurantid = L.restaurantid WHERE R.restaurantid = $_GET[restaurantid] AND restaurantname ='$row[1]'";
+	$sqlololol = "SELECT DISTINCT restaurantname FROM $project_name.restaurant WHERE restaurantid = $_GET[restaurantid]";
+	$sqldatallololol = pg_query($conn, $sqlololol) or die('error getting data');
+	$rowlololol = pg_fetch_row($sqldatallololol);
+	$sqlgetotherlocations = "	SELECT L.streetaddress 
+								FROM php_project.restaurant AS R 
+									INNER JOIN php_project.location AS L ON R.restaurantid = L.restaurantid 
+								WHERE R.restaurantname = '$rowlololol[0]'";
 	$sqlotherlocationsdata = pg_query($conn, $sqlgetotherlocations) or die('error getting data');
 	$sqlgetratings = "SELECT * FROM $project_name.RATING AS R INNER JOIN $project_name.RESTAURANT AS RA ON R.restaurantid = RA.restaurantid INNER JOIN $project_name.RATER AS RAT ON RAT.userid = R.userid WHERE R.restaurantid = $_GET[restaurantid]";
 	$sqlratingdata = pg_query($conn, $sqlgetratings) or die('error getting data');
