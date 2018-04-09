@@ -111,6 +111,42 @@
 					<button type='submit' class='btn' name='btn5'>SHOW ME</button>
 				</form>
 				
+				<form action='index.php' method='POST'>
+					<text><b>Details of the raters that rated Restaurant X the most</b></text>
+					<input list='restaurants' name='restaurant' placeholder='Choose a restaurant name' maxlength='31'>
+					<datalist id='restaurants'>
+			";
+						include_once 'dbh.php';
+						$sqlget = "	SELECT DISTINCT restaurantname
+									FROM $project_name.restaurant 
+									ORDER BY restaurantname ASC";
+						$sqldata = pg_query($conn, $sqlget) or die('error getting data');
+						while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){
+							echo "<option value='".$row['restaurantname']."'>";
+						}
+		echo "
+						</datalist>
+					<button type='submit' class='btn' name='btn6'>SHOW ME</button>
+				</form>
+				
+				<form action='index.php' method='POST'>
+					<text><b>Raters with ratings below this rater's first name </b></text>
+					<input list='firstnames' name='firstname' placeholder='Choose a first name' maxlength='31'>
+					<datalist id='firstnames'>
+			";
+						include_once 'dbh.php';
+						$sqlget = "	SELECT DISTINCT firstname
+									FROM $project_name.rater 
+									ORDER BY firstname ASC";
+						$sqldata = pg_query($conn, $sqlget) or die('error getting data');
+						while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){
+							echo "<option value='".$row['firstname']."'>";
+						}
+		echo "
+					</datalist>
+					<button type='submit' class='btn' name='btn7'>SHOW ME</button>
+				</form>
+				
 				<a href='index.php'>RESET A FILTER</a>
 				<br>
 				<br>
@@ -329,6 +365,102 @@
 		}
 		echo "</tbody></table>";
 		
+	} else if (isset($_POST['btn6'])){
+		include_once 'dbh.php';
+		$sqlget = "	SELECT * 
+					FROM $project_name.rater";
+		$sqldata = pg_query($conn, $sqlget) or die('error getting data');
+		
+		$arrayOfUserIds = array_fill(0, pg_num_rows($sqldata), 0);
+		$arrayOfNumberOfRatings = array_fill(0, pg_num_rows($sqldata), 0);		
+		
+		$x = 0;
+		while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){
+			$arrayOfUserIds[$x] = $row['userid'];
+			$sqlnumberofratings = "SELECT * 
+									FROM $project_name.rater AS R 
+										INNER JOIN $project_name.rating as RA ON R.userid = RA.userid 
+										INNER JOIN $project_name.restaurant AS RE ON RE.restaurantid = RA.restaurantid
+									WHERE R.userid = '$row[userid]' AND RE.restaurantname='".$_POST['restaurant']."'";
+			$sqlnumberofratingsdata = pg_query($conn, $sqlnumberofratings) or die('error getting data');
+			$row1 = pg_fetch_row($sqlnumberofratingsdata);
+			
+			$arrayOfNumberOfRatings[$x] = (int)pg_num_rows($sqlnumberofratingsdata);
+			$x++;
+		}
+		
+		echo max($arrayOfNumberOfRatings);
+		$new_array = array_keys($arrayOfNumberOfRatings, max($arrayOfNumberOfRatings));
+
+		echo "
+			<table class='wrapper'>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Rater Reputation</th>
+						<th>Rating comment </th>
+						<th>Item name</th>
+						<th>Item price</th>
+		";
+		
+		echo "</thead></tr><tbody>";
+		
+		for ($x = 0; $x < sizeof($new_array); $x++){
+												
+			$sqlstatement = "		SELECT *
+									FROM php_project.rater 
+										INNER JOIN php_project.ratingitem ON Rater.userid=Ratingitem.userid
+										INNER JOIN php_project.menuitem ON Ratingitem.itemid=Menuitem.itemid
+										INNER JOIN php_project.restaurant ON Menuitem.restaurantid=Restaurant.restaurantid
+									WHERE Rater.userid='".$arrayOfUserIds[$new_array[$x]]."' and Restaurant.restaurantname='".$_POST['restaurant']."'";
+									
+			$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
+			while($row3 = pg_fetch_array($sqldata1, NULL, PGSQL_ASSOC)){
+				echo "	<tr>
+						<td>".$row3['firstname']."</td>
+						<td>".$row3['lastname']."</td>
+						<td>".$row3['reputation']."</td>
+						<td>".$row3['ratingcomment']."</td>
+						<td>".$row3['itemname']."</td>
+						<td>".$row3['itemprice']."</td>
+						</tr>
+						";				
+			}
+		}
+		echo "</tbody></table>";
+	} else if (isset($_POST['btn7'])){
+		$sql = "SELECT *
+				FROM php_project.rater AS RAT
+				WHERE RAT.userid IN (	SELECT RA.userid 
+										FROM php_project.rating AS RA
+										WHERE (RA.price+RA.food+RA.mood+RA.staff) < ANY(SELECT (RATE.price+RATE.food+RATE.mood+RATE.staff) 
+																						FROM php_project.rating as RATE 
+																						WHERE RATE.userid IN (	SELECT RATER.userid 
+																												FROM php_project.rater AS RATER 
+																												WHERE RATER.firstname='".$_POST['firstname']."')))";
+		$sqldata = pg_query($conn, $sql) or die('error getting data');
+		
+		echo "
+			<table class='wrapper'>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+		";
+		
+		echo "</thead></tr><tbody>";
+		
+		while($row3 = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){
+				echo "	<tr>
+						<td>".$row3['firstname']."</td>
+						<td>".$row3['lastname']."</td>
+						<td>".$row3['emailaddress']."</td>
+						</tr>
+						";				
+		}
+		echo "</tbody></table>";
 	}
 	
 	echo "</fieldset></div><br><br>";

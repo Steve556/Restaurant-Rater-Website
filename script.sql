@@ -86,7 +86,7 @@ INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,p
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('eatingcanada@gmail.com','Eating', 'Canada', CURRENT_DATE,'Blog', '0', 'password', 'eating_Canada');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('genevieve@gmail.com','Genevieve', ' Charest', CURRENT_DATE,'Blog', '0', 'password', 'genevieve_Charest');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('chief@gmail.com','Chief', 'Trump', CURRENT_DATE,'Blog', '0', 'password', 'chief');
-INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('michel@gmail.com','Michel', 'Steven', CURRENT_DATE,'Blog', '0', 'password', 'foodislove');
+INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('michel@gmail.com','John', 'Steven', CURRENT_DATE,'Blog', '0', 'password', 'foodislove');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('eclarke@gmail.com','Emilia', 'Clarke', CURRENT_DATE,'Blog', '0', 'password', 'mrsFoodie');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('hangtun@gmail.com','Hang', 'On', CURRENT_DATE,'Blog', '0', 'password', 'hang_t');
 INSERT INTO Rater(emailaddress,firstname,lastname,joindate,usertype,reputation,password,username) VALUES ('pollock@gmail.com','Aly', 'Pollock', CURRENT_DATE,'Online', '0', 'password', 'alp');
@@ -267,6 +267,7 @@ INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 4, 4, 4, 4, 'Not a bad burger but not anything mind blowing either. Se ice was attentive. Beer list has a couple of local brews. For the high rating I expected something more', 13);
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 3, 3, 3, 3, 'Great service. The pork sandwich with kimchi was awesome. Portions were generous and very affordable. Beer (Manx 20 stock ale) was good. I will go again.', 14);
 INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (15 , CURRENT_DATE, 4, 4, 4, 4, 'Food is excellent! Had many vegetarian options. The bobotie with tofu was delicious!! Service slow with reservation of 10 people cause only 1 person serving and bar tending and 2 cooks. Overall good times though!', 15);
+INSERT INTO Rating(userid,ratingdate,price,food,mood,staff,comments,restaurantid) VALUES (5 , CURRENT_DATE, 4, 4, 4, 4, 'Their pastries are massively overrated however and I wouldn''t bother buying any again. We got a variety of them to take home and nothing was memorable. It didn''t feel worth the calories to finish eating the cronuts. Suzy Q still rules the ring-ed pastry scene in my books.', 3);
 
 --Inserting into Menuitem
 

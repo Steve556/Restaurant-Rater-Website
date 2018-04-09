@@ -63,7 +63,6 @@
 						?>
 						<li><a href="raters.php">Raters</a></li>
 						<li><a href="menuitems.php">Menu Items</a></li>
-						<li><a href="help.php">Help</a></li>
 					</ul>
 				</div>
 			</div>

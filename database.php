@@ -26,6 +26,8 @@
 	
 	
 	echo "
+			<h1 style='text-align: center; font-size: 24px; font-family:Georgia;'><b>Restaurant details and average ratings</b></h1>
+			<br>
 			<table class='wrapper'>
 				<thead>
 					<tr>
@@ -109,6 +111,8 @@
 	
 	echo "
 			<br>
+			<h1 style='text-align: center; font-size: 24px;font-family:Georgia;'><b>Average cost of menu items per category and restaurant types</b></h1>
+			<br>
 			<table class='wrapper'>
 				<thead>
 					<tr>
@@ -126,7 +130,7 @@
 	for ($x = 0; $x < sizeof($restauranttypes); $x++){
 		echo "<tr><td>".$restauranttypes[$x]."</td>";
 		for ($y = 0; $y < sizeof($categories); $y++){
-			$sqlstatement = "SELECT ROUND(AVG(avgprice),2) FROM (SELECT Menuitem.itemprice as avgprice, Menuitem.itemcategory as ItemCat FROM php_project.menuitem INNER JOIN php_project.restaurant ON Restaurant.restaurantid=MenuItem.restaurantID WHERE restauranttype='$restauranttypes[$x]' and itemcategory='$categories[$y]') menuitem";
+			$sqlstatement = "SELECT ROUND(AVG(avgprice),2) FROM (SELECT Menuitem.itemprice as avgprice, Menuitem.itemcategory as ItemCat FROM $project_name.menuitem INNER JOIN $project_name.restaurant ON Restaurant.restaurantid=MenuItem.restaurantID WHERE restauranttype='$restauranttypes[$x]' and itemcategory='$categories[$y]') menuitem";
 			$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
 			if (is_null(pg_fetch_result($sqldata1, 0))){
 				echo "<td>0.00</td>";
