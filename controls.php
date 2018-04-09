@@ -100,10 +100,15 @@
 					<button type='submit' class='btn' name='restaurantTypeBtn'>FILTER</button>
 				</form>
 				
-				<form action='index.php' method='GET'>
+				<form action='index.php' method='POST'>
 					<label for='restauranttypemorepopularthanothers'><b>Is restaurant type X more popular than others? </b></label>
 					<input list='restaurantTypes' name='restauranttypemorepopularthanothers' placeholder='Choose a restaurant type'>
 					<button type='submit' class='btn' name='btn1'>ANSWER ME</button>
+				</form>
+				
+				<form action='index.php' method='POST'>
+					<text><b>Highest overall rating in terms of the Food and the Mood of restaurants for raters </b></text>
+					<button type='submit' class='btn' name='btn5'>SHOW ME</button>
 				</form>
 				
 				<a href='index.php'>RESET A FILTER</a>
@@ -228,7 +233,7 @@
 		}
 		
 		echo "</tbody></table>";		
-	} else if (isset($_GET['restauranttypemorepopularthanothers'])){
+	} else if (isset($_POST['restauranttypemorepopularthanothers'])){
 		include_once 'dbh.php';
 		$sqlget = "	SELECT * 
 					FROM $project_name.restaurant";
@@ -245,13 +250,85 @@
 			$arrayOfNumberOfRatings[$x] = pg_num_rows($sqlratersdata);
 			$x++;
 		}
-		$x = array_search($_GET['restauranttypemorepopularthanothers'], $restauranttypes);
+		$x = array_search($_POST['restauranttypemorepopularthanothers'], $restauranttypes);
 		
 		if (max($arrayOfNumberOfRatings) ==  $arrayOfNumberOfRatings[$x]) {
 			echo "<text style='color: red'><b>YES</b></text>";
 		} else {
 			echo "<text style='color: red'><b>NO</b></text>";
 		}
+	} else if (isset($_POST['btn5'])){
+		include_once 'dbh.php';
+		$sqlget = "	SELECT * 
+					FROM $project_name.rater";
+		$sqldata = pg_query($conn, $sqlget) or die('error getting data');
+		
+		$arrayOfUserIds = array_fill(0, pg_num_rows($sqldata), 0);
+		$arrayOfAvgFoodRatings = array_fill(0, pg_num_rows($sqldata), 0);
+		$arrayOfAvgMoodRatings = array_fill(0, pg_num_rows($sqldata), 0);
+		$additionOfAverages = array_fill(0, pg_num_rows($sqldata), 0);
+		
+		
+		$x = 0;
+		while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){
+			$arrayOfUserIds[$x] = $row['userid'];
+			$sqlgetavgfoodrating = "SELECT AVG(RA.food) 
+									FROM $project_name.rater AS R 
+										INNER JOIN $project_name.rating as RA ON R.userid = RA.userid 
+									WHERE R.userid = '$row[userid]'";
+			$sqlavgfooddata = pg_query($conn, $sqlgetavgfoodrating) or die('error getting data');
+			$row1 = pg_fetch_row($sqlavgfooddata);
+			$arrayOfAvgFoodRatings[$x] = (int)$row1[0];
+			$sqlgetavgmoodrating = "SELECT AVG(RA.mood) 
+									FROM $project_name.rater AS R 
+										INNER JOIN $project_name.rating as RA ON R.userid = RA.userid 
+									WHERE R.userid = '$row[userid]'";
+			$sqlavgmooddata = pg_query($conn, $sqlgetavgmoodrating) or die('error getting data');
+			$row2 = pg_fetch_row($sqlavgmooddata);
+			$arrayOfAvgMoodRatings[$x] = (int)$row2[0];
+			$additionOfAverages[$x] = $arrayOfAvgMoodRatings[$x] + $arrayOfAvgFoodRatings[$x];
+			$x++;
+		}
+		
+		$new_array = array_keys($additionOfAverages, max($additionOfAverages));
+
+		echo "
+			<table class='wrapper'>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Join Date</th>
+						<th>Rater Reputation</th>
+						<th>Restaurant name</th>
+						<th>Rating Date</th>
+		";
+		
+		echo "</thead></tr><tbody>";
+		
+		for ($x = 0; $x < sizeof($new_array); $x++){
+			
+			$sqlstatement = "	SELECT *
+									FROM php_project.rater AS R
+										INNER JOIN php_project.rating AS RA ON R.userid=RA.userid
+										INNER JOIN php_project.restaurant AS RE ON RA.restaurantid=RE.restaurantid
+									WHERE R.userid = '".$arrayOfUserIds[$new_array[$x]]."'";
+			
+			$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
+			while($row3 = pg_fetch_array($sqldata1, NULL, PGSQL_ASSOC)){
+				echo "	<tr>
+						<td>".$row3['firstname']."</td>
+						<td>".$row3['lastname']."</td>
+						<td>".$row3['joindate']."</td>
+						<td>".$row3['reputation']."</td>
+						<td>".$row3['restaurantname']."</td>
+						<td>".$row3['ratingdate']."</td>
+						</tr>
+						";				
+			}
+		}
+		echo "</tbody></table>";
+		
 	}
 	
 	echo "</fieldset></div><br><br>";
