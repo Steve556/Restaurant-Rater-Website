@@ -105,6 +105,7 @@
 						echo "<div class = 'commentbox clear'>
 								<img src='https://png.pngtree.com/element_origin_min_pic/17/07/21/7507595ce4bd95c7f36f43332c6a5647.jpg' alt='Smiley face' height='42' width='42' align='left'>
 								<br>$row2[firstname] $row2[lastname] (<b>$row2[username]</b>)<br><br><br>
+								<b>Rating Date: &nbsp</b> $row2[ratingdate] <br><br>
 								<b>Rated</b>: &nbsp <u>Price</u>: $row2[price] &nbsp <u>Food</u>: $row2[food] &nbsp <u>Mood</u>: $row2[mood] &nbsp <u>Staff</u>: $row2[staff] <br><br>
 								
 								<p><b>Commented:</b> <br><br> '' $row2[comments] ''

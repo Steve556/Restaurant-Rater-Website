@@ -16,6 +16,7 @@
 									INNER JOIN php_project.location AS L ON R.restaurantid = L.restaurantid 
 								WHERE R.restaurantname = '$rowlololol[0]'";
 	$sqlotherlocationsdata = pg_query($conn, $sqlgetotherlocations) or die('error getting data');
+	
 	$sqlgetratings = "SELECT * FROM $project_name.RATING AS R INNER JOIN $project_name.RESTAURANT AS RA ON R.restaurantid = RA.restaurantid INNER JOIN $project_name.RATER AS RAT ON RAT.userid = R.userid WHERE R.restaurantid = $_GET[restaurantid]";
 	$sqlratingdata = pg_query($conn, $sqlgetratings) or die('error getting data');
 	$sqlgetfoodrating = "SELECT ROUND(AVG(RA.food), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $_GET[restaurantid]";
@@ -31,9 +32,11 @@
 		$sqlmaxpriceditem = "SELECT Menuitem.itemname as ItemName, MenuItem.itemprice as MaxPrice, Location.managername as ManagerName, Location.openinghour as OpenHours, Restaurant.restaurantwebsite as RestURL FROM $project_name.menuitem INNER JOIN $project_name.Location ON Menuitem.restaurantid=Location.restaurantid INNER JOIN $project_name.Restaurant ON Menuitem.restaurantid=Restaurant.restaurantid WHERE Menuitem.itemcategory = '".$_POST['category']."' AND Menuitem.restaurantid = '$_GET[restaurantid]' and itemprice = (SELECT MAX(itemprice) FROM $project_name.menuitem WHERE restaurantid = '$_GET[restaurantid]' AND Menuitem.itemcategory = '".$_POST['category']."');";
 		$sqlgetmenuitems = "SELECT * FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid] AND M.itemcategory='".$_POST['category']."'";
 	} else {
+		//PART D SQL
 		$sqlmaxpriceditem = "SELECT Menuitem.itemname as ItemName, MenuItem.itemprice as MaxPrice, Location.managername as ManagerName, Location.openinghour as OpenHours, Restaurant.restaurantwebsite as RestURL FROM $project_name.menuitem INNER JOIN $project_name.Location ON Menuitem.restaurantid=Location.restaurantid INNER JOIN $project_name.Restaurant ON Menuitem.restaurantid=Restaurant.restaurantid WHERE Menuitem.restaurantid = '$_GET[restaurantid]' and itemprice = (SELECT MAX(itemprice) FROM $project_name.menuitem WHERE restaurantid = '$_GET[restaurantid]');";
 		$sqlgetmenuitems = "SELECT * FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid]";
 	}
+	//PART B SQL
 	$sqlmenudata = pg_query($conn, $sqlgetmenuitems) or die('error getting data');
 	$sqlgetcategorytypes = "SELECT DISTINCT itemcategory FROM $project_name.restaurant AS R INNER JOIN $project_name.menuitem AS M ON R.restaurantid = M.restaurantid WHERE R.restaurantid = $_GET[restaurantid]";
 	$sqlcategorydata = pg_query($conn, $sqlgetcategorytypes) or die('error getting data');

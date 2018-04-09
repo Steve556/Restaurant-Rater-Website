@@ -1,0 +1,3 @@
+We got noticed last day that we were supposed to submit a separate SQL sheet.
+We didn't have time to do it but we did implement everything to website.
+The project description says that we are only supposed to submit the source code...

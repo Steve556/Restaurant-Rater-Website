@@ -2,8 +2,10 @@
 	include_once 'dbh.php';
 	
 	if (isset($_POST['type'])){
+		// PART C SQL
 		$sqlget = "SELECT * FROM $project_name.restaurant WHERE restauranttype='$_POST[type]'";
 	} else if (isset($_POST['years']) && isset($_POST['months'])){
+		// PART G SQL
 		$sqlget = "SELECT * 
 				   FROM $project_name.restaurant AS R
                    WHERE R.restaurantid NOT IN (SELECT RA.restaurantid
@@ -11,6 +13,7 @@
 						                    WHERE EXTRACT(YEAR FROM ratingdate) = '$_POST[years]' AND EXTRACT(MONTH FROM ratingdate) = '$_POST[months]');";
 	} else if (isset($_POST['staffratingeffect'])){
 		$int = (int)$_POST['staffratingeffect'];
+		// PART H SQL
 		$sqlget = "	SELECT *
 					FROM $project_name.restaurant AS R
 					WHERE R.restaurantID IN (SELECT DISTINCT RA.restaurantid
@@ -18,6 +21,7 @@
 												WHERE RA.staff < $int);
 					";
 	} else {
+		//PART A SQL
 		$sqlget = "SELECT * FROM $project_name.restaurant";
 	}
 	
@@ -48,6 +52,8 @@
 		";
 		
 	while($row = pg_fetch_array($sqldata, NULL, PGSQL_ASSOC)){ // fetches the data row by row
+		//PART A SQL
+		//PART C SQL
 		$sqlgetraters = "SELECT R.restaurantid FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
 		$sqlratersdata = pg_query($conn, $sqlgetraters) or die('error getting data');
 		$sqlgetfoodrating = "SELECT ROUND(AVG(RA.food), 2) FROM $project_name.restaurant AS R INNER JOIN $project_name.rating as RA ON R.restaurantid = RA.restaurantid WHERE RA.restaurantid = $row[restaurantid]";
@@ -130,6 +136,7 @@
 	for ($x = 0; $x < sizeof($restauranttypes); $x++){
 		echo "<tr><td>".$restauranttypes[$x]."</td>";
 		for ($y = 0; $y < sizeof($categories); $y++){
+			//PART E SQL
 			$sqlstatement = "SELECT ROUND(AVG(avgprice),2) FROM (SELECT Menuitem.itemprice as avgprice, Menuitem.itemcategory as ItemCat FROM $project_name.menuitem INNER JOIN $project_name.restaurant ON Restaurant.restaurantid=MenuItem.restaurantID WHERE restauranttype='$restauranttypes[$x]' and itemcategory='$categories[$y]') menuitem";
 			$sqldata1 = pg_query($conn, $sqlstatement) or die('error getting data');
 			if (is_null(pg_fetch_result($sqldata1, 0))){

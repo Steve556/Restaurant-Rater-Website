@@ -62,6 +62,14 @@
 							<option value='2010'>
 							<option value='2009'>
 							<option value='2008'>
+							<option value='2007'>
+							<option value='2006'>
+							<option value='2005'>
+							<option value='2004'>
+							<option value='2003'>
+							<option value='2002'>
+							<option value='2001'>
+							<option value='2000'>
 						</datalist>
 					<input list='months' name='months' placeholder='Choose a month.'>
 						<datalist id='months'>
@@ -250,6 +258,7 @@
 		
 		echo "</thead></tr><tbody>";
 		
+		// PART I SQL
 		$sqlstatement = "	SELECT DISTINCT Restaurant.restauranttype, Restaurant.restaurantname, Rater.firstname, Rater.lastname, Rating.food
 									FROM $project_name.rater
 										INNER JOIN $project_name.rating ON Rater.userid=Rating.userid
@@ -270,6 +279,7 @@
 		
 		echo "</tbody></table>";		
 	} else if (isset($_POST['restauranttypemorepopularthanothers'])){
+		// PART J SQL
 		include_once 'dbh.php';
 		$sqlget = "	SELECT * 
 					FROM $project_name.restaurant";
@@ -294,6 +304,7 @@
 			echo "<text style='color: red'><b>NO</b></text>";
 		}
 	} else if (isset($_POST['btn5'])){
+		// PART L SQL
 		include_once 'dbh.php';
 		$sqlget = "	SELECT * 
 					FROM $project_name.rater";
@@ -366,6 +377,7 @@
 		echo "</tbody></table>";
 		
 	} else if (isset($_POST['btn6'])){
+		// PART M SQL
 		include_once 'dbh.php';
 		$sqlget = "	SELECT * 
 					FROM $project_name.rater";
@@ -430,6 +442,7 @@
 		}
 		echo "</tbody></table>";
 	} else if (isset($_POST['btn7'])){
+		// PART N SQL
 		$sql = "SELECT *
 				FROM $project_name.rater AS RAT
 				WHERE RAT.userid IN (	SELECT RA.userid 

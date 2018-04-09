@@ -59,6 +59,7 @@
 						echo "<div class = 'commentbox clear'>
 								<img src='https://www.zonkafeedback.com/wp-content/uploads/2015/01/survey-question.jpg' alt='Smiley face' height='42' width='42' align='left'>
 								<br><b>$row2[restaurantname]</b><br><br><br>
+								<b>Rating Date: &nbsp</b> $row2[ratingdate] <br><br>
 								<b>Rated</b>: &nbsp <u>Price</u>: $row2[price] &nbsp <u>Food</u>: $row2[food] &nbsp <u>Mood</u>: $row2[mood] &nbsp <u>Staff</u>: $row2[staff] <br><br>
 								<p><b>Commented:</b> <br><br> '' $row2[comments] ''
 								</p>
